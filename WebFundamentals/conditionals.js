@@ -118,8 +118,8 @@ I want my selections to be hot chocolate, tea, or cake.
 */
 
 function yourReward(finished, time, day) {
-  oddOptions = ["ice cream", "cookies", "candy"];
-  evenOptions = ["hot chocolate", "tea", "cake"];
+  let oddOptions = ["ice cream", "cookies", "candy"];
+  let evenOptions = ["hot chocolate", "tea", "cake"];
 
   if (finished) {
     if (time < 10) {
@@ -128,12 +128,12 @@ function yourReward(finished, time, day) {
       console.log("Grab a hot chocolate!");
     } else if (15 <= time < 18) {
       // get a random number from 0-2
-      randomIndex = Math.floor(Math.random() * 3);
+      let randomIndex = Math.floor(Math.random() * 3);
       if (time % 2 != 0) {
-        choice = oddOptions[randomIndex];
+        var choice = oddOptions[randomIndex];
         console.log("Pick a flavor of " + choice + "!");
       } else {
-        choice = evenOptions[randomIndex];
+        var choice = evenOptions[randomIndex];
         console.log("Get some hot " + choice + "!");
       }
     } else if (time < 22) {
