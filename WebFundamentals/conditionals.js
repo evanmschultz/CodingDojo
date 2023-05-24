@@ -11,15 +11,15 @@ If it's after 10 pm, I don't want anything other than sleep!
 
 function reward(finished, time) {
   if (finished && time < 10) {
-    console.log("Have a latte!");
+    console.log("Have a latte!")
   } else if (finished && time < 16) {
-    console.log("Grab a hot chocolate!");
+    console.log("Grab a hot chocolate!")
   } else if (finished && time < 22) {
-    console.log("Get some ice cream!");
+    console.log("Get some ice cream!")
   } else if (finished && time >= 22) {
-    console.log("Great work, go to sleep!");
+    console.log("Great work, go to sleep!")
   } else {
-    console.log("Get back to work!");
+    console.log("Get back to work!")
   }
 }
 
@@ -41,20 +41,20 @@ Building off the MVP, if I'm up for ice cream, I want strawberry - but only if i
 function yourReward(finished, time, day) {
   if (finished) {
     if (time < 10) {
-      console.log("Have a latte!");
+      console.log("Have a latte!")
     } else if (time < 16) {
-      console.log("Grab a hot chocolate!");
+      console.log("Grab a hot chocolate!")
     } else if (time < 22) {
       if (day == "Wednesday") {
-        console.log("Get yourself some strawberry ice cream!");
+        console.log("Get yourself some strawberry ice cream!")
       } else {
-        console.log("Get yourself some vanilla ice cream!");
+        console.log("Get yourself some vanilla ice cream!")
       }
     } else if (time >= 22) {
-      console.log("Great work, go to sleep!");
+      console.log("Great work, go to sleep!")
     }
   } else {
-    console.log("Get back to work!");
+    console.log("Get back to work!")
   }
 }
 
@@ -76,26 +76,26 @@ I want to have it pick either ice cream or hot chocolate depending on if the tim
 function yourReward(finished, time, day) {
   if (finished) {
     if (time < 10) {
-      console.log("Have a latte!");
+      console.log("Have a latte!")
     } else if (time < 15) {
-      console.log("Grab a hot chocolate!");
+      console.log("Grab a hot chocolate!")
     } else if (15 <= time < 18) {
       if (time % 2 != 0) {
-        console.log("Pick a flavor of ice cream!");
+        console.log("Pick a flavor of ice cream!")
       } else {
-        console.log("Get some hot chocolate!");
+        console.log("Get some hot chocolate!")
       }
     } else if (time < 22) {
       if (day == "Wednesday") {
-        console.log("Get yourself some strawberry ice cream!");
+        console.log("Get yourself some strawberry ice cream!")
       } else {
-        console.log("Get yourself some vanilla ice cream!");
+        console.log("Get yourself some vanilla ice cream!")
       }
     } else if (time >= 22) {
-      console.log("Great work, go to sleep!");
+      console.log("Great work, go to sleep!")
     }
   } else {
-    console.log("Get back to work!");
+    console.log("Get back to work!")
   }
 }
 
@@ -118,35 +118,35 @@ I want my selections to be hot chocolate, tea, or cake.
 */
 
 function yourReward(finished, time, day) {
-  let oddOptions = ["ice cream", "cookies", "candy"];
-  let evenOptions = ["hot chocolate", "tea", "cake"];
+  let oddOptions = ["ice cream", "cookies", "candy"]
+  let evenOptions = ["hot chocolate", "tea", "cake"]
 
   if (finished) {
     if (time < 10) {
-      console.log("Have a latte!");
+      console.log("Have a latte!")
     } else if (time < 15) {
-      console.log("Grab a hot chocolate!");
+      console.log("Grab a hot chocolate!")
     } else if (15 <= time < 18) {
       // get a random number from 0-2
-      let randomIndex = Math.floor(Math.random() * 3);
+      let randomIndex = Math.floor(Math.random() * 3)
       if (time % 2 != 0) {
-        var choice = oddOptions[randomIndex];
-        console.log("Pick a flavor of " + choice + "!");
+        var choice = oddOptions[randomIndex]
+        console.log("Pick a flavor of " + choice + "!")
       } else {
-        var choice = evenOptions[randomIndex];
-        console.log("Get some hot " + choice + "!");
+        var choice = evenOptions[randomIndex]
+        console.log("Get some hot " + choice + "!")
       }
     } else if (time < 22) {
       if (day == "Wednesday") {
-        console.log("Get yourself some strawberry ice cream!");
+        console.log("Get yourself some strawberry ice cream!")
       } else {
-        console.log("Get yourself some vanilla ice cream!");
+        console.log("Get yourself some vanilla ice cream!")
       }
     } else if (time >= 22) {
-      console.log("Great work, go to sleep!");
+      console.log("Great work, go to sleep!")
     }
   } else {
-    console.log("Get back to work!");
+    console.log("Get back to work!")
   }
 }
 
