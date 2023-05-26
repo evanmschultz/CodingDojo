@@ -18,20 +18,32 @@ let customers = [
     [1, 3],
     [-3, -3],
 ]
+let customers2 = [
+    [4, 4],
+    [0, 0],
+    [0, 0],
+    [4, 4],
+]
 
 function truckLocation(arr) {
+    // assign variable sum of x and y coordinates to calculate avg and set to 0
     let sumX = 0
     let sumY = 0
 
+    // iterate through array to calculate sumX and sumY
     for (i = 0; i < arr.length; i++) {
         sumX += arr[i][0]
         sumY += arr[i][1]
     }
 
+    // calculate avg's
     let avgX = Math.round(sumX / arr.length)
     let avgY = Math.round(sumY / arr.length)
 
-    return [avgX, avgY]
+    let response = `The optimal truck location is: ${[avgX, avgY]}`
+
+    return response
 }
 
 console.log(truckLocation(customers))
+console.log(truckLocation(customers2))
