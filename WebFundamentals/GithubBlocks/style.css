@@ -44,6 +44,7 @@ img {
     height: 1% !important;
     background-color: rgba(127, 161, 216, 0.1);
     font-weight: 100;
+    box-shadow: 0.01rem 0.02rem 0.08rem rgba(41, 41, 41, 0.28) !important;
 }
 .text {
     color: rgba(41, 41, 41, 0.9);
