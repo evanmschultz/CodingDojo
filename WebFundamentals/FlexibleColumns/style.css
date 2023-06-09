@@ -3,7 +3,24 @@ body {
 }
 .row {
     display: flex;
+    gap: 1.5rem; /* create space between the children without affecting the space from the parent*/
+    margin: 1.5rem 0rem;
+    height: 3rem;
+    justify-content: space-between;
 }
-.col {
+.col,
+.col-2,
+.col-3 {
+    background-color: rgb(114, 161, 169);
     flex: 1;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: aliceblue;
+}
+.col-2 {
+    flex: 2;
+}
+.col-3 {
+    flex: 3;
 }
