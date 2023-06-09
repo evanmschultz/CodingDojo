@@ -1,0 +1,37 @@
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(51, 51, 51);
+    padding: 0px 30px;
+    height: 65px;
+}
+.nav-title {
+    color: rgb(240, 240, 240);
+}
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+    list-style: none;
+}
+a {
+    color: rgb(143, 143, 143);
+    text-decoration: none;
+}
+a:focus {
+    color: rgb(240, 240, 240);
+}
+.btn {
+    background-color: rgb(74, 160, 181);
+    color: rgb(240, 240, 240);
+    font-size: large;
+    border: 3px solid black;
+    box-shadow: 3px 3px 0px black;
+    padding: 4px 10px;
+}
