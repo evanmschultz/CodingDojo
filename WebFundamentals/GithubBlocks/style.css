@@ -8,14 +8,17 @@ body {
     font-family: "roboto", sans-serif;
     font-weight: 300;
 }
-h1 {
-    font-size: xx-large;
+.header {
+    font-size: large;
     color: rgba(41, 41, 41, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 img {
     height: 200px;
 }
-div {
+.header ~ div {
     height: 240px;
     width: 95%;
     display: flex;
@@ -38,10 +41,7 @@ div {
     border-radius: 0.1%;
 }
 .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3%;
+    height: 1% !important;
     background-color: rgba(127, 161, 216, 0.1);
     font-weight: 100;
 }
