@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            canvas {
+                background-color: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="convexHullCanvas"></canvas>
+
+        <script>
+            // Get the canvas element
+            const canvas = document.getElementById("convexHullCanvas")
+            const ctx = canvas.getContext("2d")
+
+            // Set the canvas dimensions
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+
+            // Point properties
+            const numPoints = 100 // Number of points
+            const pointRadius = 3 // Radius of points
+
+            // Generate random points
+            const points = []
+            for (let i = 0; i < numPoints; i++) {
+                const x = Math.random() * canvas.width
+                const y = Math.random() * canvas.height
+                points.push({ x, y })
+            }
+
+            // Sort points in counterclockwise order around the lowest point
+            const getLowestPoint = () => {
+                let lowestPoint = points[0]
+                for (let i = 1; i < points.length; i++) {
+                    if (
+                        points[i].y < lowestPoint.y ||
+                        (points[i].y === lowestPoint.y &&
+                            points[i].x < lowestPoint.x)
+                    ) {
+                        lowestPoint = points[i]
+                    }
+                }
+                return lowestPoint
+            }
+
+            const sortByPolarAngle = (a, b) => {
+                const angleA = Math.atan2(
+                    a.y - lowestPoint.y,
+                    a.x - lowestPoint.x
+                )
+                const angleB = Math.atan2(
+                    b.y - lowestPoint.y,
+                    b.x - lowestPoint.x
+                )
+
+                if (angleA < angleB) {
+                    return -1
+                }
+                if (angleA > angleB) {
+                    return 1
+                }
+                return 0
+            }
+
+            const lowestPoint = getLowestPoint()
+            points.sort(sortByPolarAngle)
+
+            // Function to draw the points and lines of the convex hull
+            function drawConvexHull() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                // Draw points
+                ctx.fillStyle = "#FFF"
+                for (let i = 0; i < points.length; i++) {
+                    const { x, y } = points[i]
+                    ctx.beginPath()
+                    ctx.arc(x, y, pointRadius, 0, 2 * Math.PI)
+                    ctx.fill()
+                }
+
+                // Draw lines of the convex hull
+                ctx.strokeStyle = "#FFF"
+                ctx.lineWidth = 2
+                ctx.beginPath()
+                ctx.moveTo(points[0].x, points[0].y)
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i].x, points[i].y)
+                }
+                ctx.closePath()
+                ctx.stroke()
+            }
+
+            // Animation loop
+            let currentIndex = 2
+            const animationLoop = setInterval(() => {
+                if (currentIndex === points.length) {
+                    clearInterval(animationLoop)
+                    return
+                }
+
+                const p = points[currentIndex]
+
+                while (points.length > 2) {
+                    const q = points[points.length - 2]
+                    const r = points[points.length - 1]
+                    const orientation =
+                        (q.x - p.x) * (r.y - p.y) - (q.y - p.y) * (r.x - p.x)
+                    if (orientation > 0) {
+                        break
+                    }
+                    points.pop()
+                }
+
+                points.push(p)
+                currentIndex++
+
+                drawConvexHull()
+            }, 500)
+
+            // Start the animation
+            drawConvexHull()
+        </script>
+    </body>
+</html>

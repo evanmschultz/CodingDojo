@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            canvas {
+                background-color: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="artworkCanvas"></canvas>
+
+        <script>
+            // Get the canvas element
+            const canvas = document.getElementById("artworkCanvas")
+            const ctx = canvas.getContext("2d")
+
+            // Set the canvas dimensions
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+
+            // Artwork properties
+            const numLines = 200 // Number of lines
+            const lineDuration = 3000 // Duration of each line animation in milliseconds
+            const lineWidth = 1.5 // Width of the lines
+            const lineColor = "#FFF" // Color of the lines
+
+            // Function to generate random lines that connect into a structure
+            function generateRandomLines() {
+                const centerX = canvas.width / 2
+                const centerY = canvas.height / 2
+                const radius = Math.min(canvas.width, canvas.height) * 0.4
+
+                const lines = []
+                for (let i = 0; i < numLines; i++) {
+                    const angle = (i / numLines) * Math.PI * 2
+                    const startX = centerX + Math.cos(angle) * radius
+                    const startY = centerY + Math.sin(angle) * radius
+                    lines.push({ startX, startY })
+                }
+
+                return lines
+            }
+
+            // Generate random lines
+            let lines = generateRandomLines()
+
+            // Function to draw the lines
+            function drawLines() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                ctx.lineWidth = lineWidth
+                ctx.strokeStyle = lineColor
+
+                lines.forEach((line) => {
+                    ctx.beginPath()
+                    ctx.moveTo(line.startX, line.startY)
+                    ctx.lineTo(line.endX, line.endY)
+                    ctx.stroke()
+                })
+            }
+
+            // Animate the lines
+            function animateLines() {
+                const animationStartTime = Date.now()
+
+                function updateLines() {
+                    const elapsedTime = Date.now() - animationStartTime
+
+                    lines.forEach((line, index) => {
+                        const angle = (index / numLines) * Math.PI * 2
+                        const radius =
+                            Math.min(canvas.width, canvas.height) * 0.4
+
+                        const animationProgress =
+                            (elapsedTime % lineDuration) / lineDuration
+                        const lineRadius = radius * animationProgress
+
+                        line.endX = line.startX + Math.cos(angle) * lineRadius
+                        line.endY = line.startY + Math.sin(angle) * lineRadius
+                    })
+
+                    drawLines()
+
+                    // Request the next animation frame
+                    requestAnimationFrame(updateLines)
+                }
+
+                updateLines()
+            }
+
+            // Start the animation
+            drawLines()
+            animateLines()
+        </script>
+    </body>
+</html>
