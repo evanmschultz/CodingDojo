@@ -1,0 +1,9 @@
+body {
+    margin: 0 auto;
+}
+.row {
+    display: flex;
+}
+.col {
+    flex: 1;
+}
