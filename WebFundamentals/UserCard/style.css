@@ -1,0 +1,60 @@
+* {
+    vertical-align: baseline;
+    font-weight: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+body {
+    display: flex;
+    justify-content: center;
+    font-family: "roboto", sans-serif;
+    font-weight: 300;
+}
+.container {
+    height: fit-content;
+    width: 50%;
+    border: 0.2rem solid #cccccc;
+    background-color: #fbfbfb;
+    margin-top: 5rem;
+    position: relative;
+}
+.top-bar {
+    height: 15%;
+    background-color: #4aa0b5;
+    height: 8rem;
+}
+.user {
+    border: 0.2rem solid #cccccc;
+    border-radius: 100%;
+    background-color: #fbfbfb;
+    padding: 0.1rem;
+    height: 8rem;
+    position: absolute;
+    top: 3rem;
+}
+.content {
+    margin-top: 3rem;
+    padding: 1.5rem;
+}
+.map-marker,
+.gear-icon {
+    height: 1.4rem;
+}
+.name,
+.text {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.text,
+.text > * {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
