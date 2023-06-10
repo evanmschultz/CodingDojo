@@ -1,0 +1,137 @@
+* {
+    margin: 0 auto;
+    border: 0;
+    padding: 0;
+    outline: 0;
+    font-family: "roboto", sans-serif;
+}
+.navbar,
+.main {
+    padding: 0 20%;
+    display: flex;
+    justify-content: space-between;
+}
+.main {
+    margin-top: 1.5rem;
+    gap: 1.5rem;
+}
+.navbar {
+    background-color: #000000;
+    height: 5rem;
+    color: #f3f3f3;
+    display: flex;
+    align-items: center;
+}
+.navbar > * {
+    display: flex;
+    align-items: center;
+}
+.nav-left {
+    height: inherit;
+    display: flex;
+    flex: 3;
+    align-items: center;
+    justify-content: space-between;
+}
+.title {
+    display: flex;
+    font-size: 2.5rem;
+    margin-left: 0;
+}
+.link {
+    text-decoration: none;
+    color: #aaaaaa;
+}
+.link:focus {
+    color: #f3f3f3;
+}
+.nav-right {
+    height: inherit;
+    flex: 2;
+}
+.nav-right > button {
+    margin-right: 0;
+    justify-self: end;
+    background-color: #4aa0b5;
+    border: 0.1rem solid #73aab8;
+    border-radius: 1%;
+    font-size: 1.5rem;
+    padding: 0.3rem 0.7rem;
+}
+.main-left {
+    display: flex;
+    flex: 2;
+}
+.main-left-1 {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 1rem;
+    border: 0.2rem solid #aaaaaa;
+    position: relative;
+    color: #333333;
+}
+.main-left-1::before {
+    width: 100%;
+    height: 25%;
+    background-color: #4aa0b5;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.main-left-1 > img {
+    margin: 3rem 2.3rem;
+    height: 9rem;
+    position: absolute;
+    border: 0.25rem solid #aaaaaa;
+    border-radius: 100%;
+    padding: 0.2rem;
+    background-color: #f3f3f3;
+    box-shadow: 0.05rem 0rem 0.1rem rgba(100, 100, 100, 0.4);
+}
+.main-left-content {
+    margin: 14rem 0 0 2.5rem;
+}
+.main-left-content > .display-name {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+.map-marker,
+.gear-icon {
+    height: 1.4rem;
+}
+.location {
+    margin-left: -100px;
+    font-size: 1.5rem;
+}
+.main-left-text,
+.main-left-text > * {
+    display: flex;
+    margin: 0 0 0.5rem;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+.main-right {
+    display: flex;
+    flex: 1;
+}
+.main-right-1 {
+    margin-left: 0;
+    display: flex;
+    width: 100%;
+    height: 30rem;
+    border: 0.2rem solid #aaaaaa;
+    position: relative;
+}
+.main-right-1::before {
+    width: 100%;
+    height: 25%;
+    background-color: #333333;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
