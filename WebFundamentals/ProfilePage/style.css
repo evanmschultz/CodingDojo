@@ -70,6 +70,11 @@
     position: relative;
     color: #333333;
 }
+
+/* /////////////////////// */
+/* Tried a new method to get a solid bar. I don't like it, but don't want to refactor it right now because it works. */
+/* /////////////////////// */
+
 .main-left-1::before {
     width: 100%;
     height: 25%;
@@ -120,18 +125,56 @@
 .main-right-1 {
     margin-left: 0;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 30rem;
+    height: fit-content;
     border: 0.2rem solid #aaaaaa;
-    position: relative;
+    /* position: relative; */
 }
-.main-right-1::before {
+.right-top-bar-1 {
+    height: fit-content;
     width: 100%;
-    height: 25%;
     background-color: #333333;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0.9rem; */
+}
+.right-top-bar-1 > * {
+    font-size: 1.4rem;
+    color: #f3f3f3;
+    height: fit-content;
+    padding: 0.7rem 0;
+}
+.right-notification-1 {
+    /* display: flex; */
+    color: #333333;
+    background-color: #aaaaaa;
+    border-radius: 100%;
+    padding: 0.1rem 0.55rem;
+    align-self: center;
+}
+.request1,
+.request2 {
+    display: flex;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+.requesting-person {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    margin-left: 0;
+}
+.request-response {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 0;
+}
+.profile-img {
+    height: 1.6rem;
+}
+.icon {
+    height: 1.6rem;
+    margin-right: 0;
 }
