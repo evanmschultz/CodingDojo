@@ -129,52 +129,50 @@
     width: 100%;
     height: fit-content;
     border: 0.2rem solid #aaaaaa;
-    /* position: relative; */
 }
-.right-top-bar-1 {
+.right-top-bar {
     height: fit-content;
     width: 100%;
     background-color: #333333;
     display: flex;
     justify-content: space-between;
-    /* padding: 0.9rem; */
 }
-.right-top-bar-1 > * {
+.right-top-bar > * {
     font-size: 1.4rem;
     color: #f3f3f3;
     height: fit-content;
     padding: 0.7rem 0;
 }
-.right-notification-1 {
-    /* display: flex; */
+.right-notification {
     color: #333333;
     background-color: #aaaaaa;
     border-radius: 100%;
     padding: 0.1rem 0.55rem;
     align-self: center;
-}
-.request1,
-.request2 {
-    display: flex;
-    margin-top: 1rem;
-    font-size: 1.4rem;
-}
-.requesting-person {
-    display: flex;
-    flex: 1;
-    justify-content: flex-start;
-    margin-left: 0;
-}
-.request-response {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
     margin-right: 0;
 }
-.profile-img {
-    height: 1.6rem;
+.connect-requests {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 0 1rem 0;
 }
-.icon {
-    height: 1.6rem;
+.request {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    display: flex;
+    width: 100%;
+    align-content: center;
+    margin: 1rem 0 1rem -0.75rem;
+}
+.request > p {
+    margin-left: -0.7rem;
+}
+.request-img,
+.request-icon {
+    height: 1.9rem;
+    border-radius: 100%;
+}
+.request-icon {
     margin-right: 0;
 }
