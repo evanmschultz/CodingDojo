@@ -13,12 +13,15 @@
     height: 4rem;
     display: flex;
     align-items: center;
-}
-.navbar {
     background-color: black;
+}
+.font-1 {
+    font-size: 2.4rem;
+    color: black;
 }
 .font-2 {
     font-size: 1.4rem;
+    font-weight: 500;
     color: black;
 }
 .font-3 {
@@ -48,4 +51,118 @@ h1 {
     width: 7rem;
     border: 0.1rem solid #6ca8b7;
     border-radius: 1%;
+}
+.main {
+    margin-top: 0.75rem;
+    display: flex;
+}
+.main-left {
+    flex: 2;
+}
+.main-right {
+    flex: 1;
+}
+.top-bar {
+    height: 15%;
+    background-color: #333333;
+    padding: 3% 3.5%;
+    display: flex;
+}
+.top-bar .font-2 {
+    color: #aaaaaa;
+    margin-left: 2%;
+}
+#notification {
+    background-color: #aaaaaa;
+    color: #333333;
+    border-radius: 100%;
+    padding: 0.1rem 0.5rem;
+}
+.box {
+    height: fit-content;
+    border: 0.2rem solid #aaaaaa;
+    padding-bottom: 1.3rem;
+}
+.main-left > .box {
+    margin: 0.75rem 0.75rem 0.75rem 0;
+}
+.main-right > .box {
+    margin: 0.75rem 0 0.75rem 0.75rem;
+}
+#box-2 {
+    margin-top: 1.5rem;
+}
+#profile-box-top-bar {
+    height: 8.7rem;
+    background-color: #4aa0b5;
+}
+.img {
+    height: 1.9rem;
+    border-radius: 100%;
+}
+#profile-img {
+    margin: 4rem 2.3rem;
+    height: 9rem;
+    position: absolute;
+    border: 0.2rem solid #aaaaaa;
+    padding: 0.2rem;
+    background-color: #f3f3f3;
+    box-shadow: 0.05rem 0rem 0.1rem rgba(100, 100, 100, 0.4);
+}
+.profile-content {
+    margin: 5.5rem 3rem 0.5rem;
+}
+.profile-content > p > * {
+    vertical-align: middle;
+}
+.profile-content p {
+    margin: 1.3rem 0 0;
+}
+.content {
+    margin: 1.5rem 2.6rem 0;
+    height: fit-content;
+}
+.content > p {
+    margin-top: 1.2rem;
+}
+.icon {
+    height: 1.4rem;
+    margin-right: 0.5rem;
+}
+.content-right {
+    margin: 1rem 0 0;
+    height: fit-content;
+}
+.content-right > div {
+    display: flex;
+    width: 100%;
+}
+.connection,
+.request-response {
+    /* border: 2px solid #333333; */
+    display: table;
+    width: 50%;
+    vertical-align: middle;
+}
+.connection > * {
+    vertical-align: middle;
+    margin: 0.7rem;
+    float: left;
+}
+.request-response > * {
+    vertical-align: middle;
+    margin: 0.5rem;
+    float: right;
+}
+#connections {
+    padding: 0;
+}
+.view-more {
+    padding: 1rem;
+    border-top: 0.2rem solid #aaaaaa;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+.profile-content a {
+    font-size: 1.2rem;
 }
