@@ -7,226 +7,45 @@
 }
 .navbar,
 .main {
-    padding: 0 20%;
-    display: flex;
-    justify-content: space-between;
-}
-.main {
-    margin-top: 1.5rem;
-    gap: 1.5rem;
+    padding: 0 15%;
 }
 .navbar {
-    background-color: #000000;
-    height: 5rem;
-    color: #f3f3f3;
+    height: 4rem;
     display: flex;
     align-items: center;
 }
-.navbar > * {
-    display: flex;
-    align-items: center;
+.navbar {
+    background-color: black;
 }
-.nav-left {
-    height: inherit;
-    display: flex;
-    flex: 3;
-    align-items: center;
-    justify-content: space-between;
+.font-2 {
+    font-size: 1.4rem;
+    color: black;
 }
-.title {
-    display: flex;
-    font-size: 2.5rem;
-    margin-left: 0;
-}
-.link {
-    text-decoration: none;
+.font-3 {
+    font-size: 1.2rem;
     color: #aaaaaa;
 }
-.link:focus {
+h1 {
+    font-size: 2.5rem;
     color: #f3f3f3;
 }
-.nav-right {
-    height: inherit;
-    flex: 2;
+.links {
+    width: 100%;
+    margin-left: 1rem;
 }
-.nav-right > button {
-    margin-right: 0;
-    justify-self: end;
+#links a {
+    text-decoration: none;
+    margin: 2rem;
+}
+#links a:focus {
+    color: #f3f3f3;
+}
+#button {
     background-color: #4aa0b5;
+    color: #f3f3f3;
+    font-size: 1.4rem;
+    padding: 0.3rem 0;
+    width: 7rem;
     border: 0.1rem solid #6ca8b7;
     border-radius: 1%;
-    font-size: 1.5rem;
-    padding: 0.3rem 0.7rem;
-}
-.main-left {
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    gap: 1.5rem;
-}
-.main-left-1,
-.main-left-2 {
-    width: 100%;
-    height: fit-content;
-    padding-bottom: 1rem;
-    border: 0.2rem solid #aaaaaa;
-    position: relative;
-    color: #333333;
-}
-
-/* /////////////////////// */
-/* Tried a new method to get a solid bar. I don't like it, but don't want to refactor it right now because it works. */
-/* /////////////////////// */
-
-.main-left-1::before {
-    width: 100%;
-    height: 25%;
-    background-color: #4aa0b5;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-.main-left-1 > img {
-    margin: 3rem 2.3rem;
-    height: 9rem;
-    position: absolute;
-    border: 0.25rem solid #aaaaaa;
-    border-radius: 100%;
-    padding: 0.2rem;
-    background-color: #f3f3f3;
-    box-shadow: 0.05rem 0rem 0.1rem rgba(100, 100, 100, 0.4);
-}
-.main-left-content {
-    margin: 14rem 0 0 2.5rem;
-}
-.main-left-content > .display-name {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    font-weight: 500;
-}
-.map-marker,
-.gear-icon {
-    height: 1.4rem;
-}
-.location {
-    margin-left: -100px;
-    font-size: 1.5rem;
-}
-.main-left-text,
-.main-left-text > * {
-    display: flex;
-    margin: 0 0 0.5rem;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.5rem;
-}
-.main-right {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-.main-right-1,
-.main-right-2 {
-    margin: 0 0 1.5rem 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: fit-content;
-    border: 0.2rem solid #aaaaaa;
-}
-.right-top-bar,
-.main-left-2-top-bar {
-    height: fit-content;
-    width: 100%;
-    background-color: #333333;
-    display: flex;
-    justify-content: space-between;
-}
-.right-top-bar > *,
-.main-left-2-top-bar > * {
-    font-size: 1.4rem;
-    color: #f3f3f3;
-    height: fit-content;
-    padding: 0.7rem 0;
-}
-.main-left-2-top-bar > * {
-    /* display: flex; */
-    width: inherit;
-    justify-content: left;
-    margin-left: 2rem;
-    /* border: 3px solid #4aa0b5; */
-}
-.main-left-2-top-bar + div {
-    margin: 1.2rem 0 0.5rem 2rem;
-    /* column-gap: 1rem; */
-}
-.education {
-    font-size: 1.6rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-}
-.education-date {
-    font-size: 1.4rem;
-    color: #aaaaaa;
-    margin-bottom: 1rem;
-}
-.education-achievments {
-    font-size: 1.2rem;
-}
-.right-notification {
-    color: #333333;
-    background-color: #aaaaaa;
-    border-radius: 100%;
-    padding: 0.1rem 0.55rem;
-    align-self: center;
-    margin-right: 0;
-}
-.connections {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    padding: 0 1rem 0;
-}
-.request {
-    display: flex;
-    width: 100%;
-    align-content: center;
-    margin: 1rem 0 1rem -2rem;
-}
-.request > p {
-    margin-left: -0.7rem;
-    font-size: 1.4rem;
-}
-.request-img,
-.request-icon,
-.connection > img {
-    height: 1.9rem;
-    border-radius: 100%;
-}
-.request-icon {
-    margin-right: 0;
-}
-.connection {
-    display: flex;
-    align-items: center;
-    width: inherit;
-    margin: 1rem 0 1rem -2rem;
-    font-size: 1.4rem;
-}
-.connection > img {
-    margin-left: 2.3rem;
-}
-.connection > p {
-    margin-left: -7rem;
-}
-.bottom-bar {
-    height: fit-content;
-    width: 95.5%;
-    margin-left: -0.2rem;
-    margin-bottom: -0.2rem;
-    border: 0.2rem solid #aaaaaa;
-    font-size: 1.4rem;
-    padding: 1rem -0 1rem 1rem;
 }
