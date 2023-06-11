@@ -22,10 +22,11 @@
             // Parameters for the Boids algorithm
             const numBoids = 2000 // Number of boids
             const maxSpeed = 2 // Maximum speed of boids
-            const perceptionRadius = 100 // Radius within which boids perceive neighbors
-            const separationWeight = 1 // Weight for separation behavior
+            const perceptionRadius = 50 // Radius within which boids perceive neighbors
+            const separationWeight = 3 // Weight for separation behavior
             const alignmentWeight = 2 // Weight for alignment behavior
             const cohesionWeight = 3 // Weight for cohesion behavior
+            const randomDirectionProbability = 1 // Probability of moving in a random direction
 
             // Boid properties
             const boids = []
@@ -110,10 +111,23 @@
                         separationX * separationWeight +
                         alignmentX * alignmentWeight +
                         cohesionX * cohesionWeight
+
                     boid.dy +=
                         separationY * separationWeight +
                         alignmentY * alignmentWeight +
                         cohesionY * cohesionWeight
+
+                    // Random movement if not near other boids
+                    if (
+                        separationCount === 0 &&
+                        alignmentCount === 0 &&
+                        cohesionCount === 0
+                    ) {
+                        if (Math.random() < randomDirectionProbability) {
+                            boid.dx = Math.random() * 2 - 1
+                            boid.dy = Math.random() * 2 - 1
+                        }
+                    }
 
                     // Limit boid speed
                     const speed = Math.sqrt(boid.dx ** 2 + boid.dy ** 2)
