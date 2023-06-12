@@ -7,13 +7,21 @@
 
 /* Fixed width container class that will "auto-center" itself */
 .container {
-    width: 1200px;
+    width: 65%;
     margin: 0 auto;
     font-family: "roboto", sans-serif;
+}
+h2 {
+    font-size: 4rem;
+    font-weight: 400;
 }
 h3 {
     font-size: 3rem;
     font-weight: 300;
+}
+p {
+    font-size: 2rem;
+    font-weight: 400;
 }
 .btn {
     border: 0.2rem solid black;
@@ -37,7 +45,7 @@ h3 {
     color: rgb(240, 240, 240);
 }
 .search-field {
-    width: 25rem;
+    width: 40%;
     background: #f3f3f3;
     border: 0.1rem solid #aaaaaa;
     border-radius: 2%;
@@ -56,13 +64,25 @@ h3 {
     border: 0.2rem solid black;
     width: inherit;
     height: fit-content;
-    /* height: 10rem; */
     margin: 2rem 1rem;
     border-radius: 0.5%;
-    padding: 1rem;
+    padding: 2rem;
 }
 .main-left > .box {
     margin-left: 0;
+    display: flex;
+    padding-left: 1rem;
+}
+.main-left > .box > div:first-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-left > .box > div:nth-child(2) {
+    flex: 2;
+    display: flex;
+    align-items: center;
 }
 .main-right > .box {
     margin-right: 0;
@@ -75,6 +95,12 @@ h3 {
 .main-left .box:nth-of-type(n + 2),
 .main-right .box:nth-of-type(n + 2) {
     margin-top: 0;
+}
+.main-left .btn {
+    background-color: #fad978;
+    color: black;
+    font-size: 2rem;
+    margin-top: 2rem;
 }
 .main-right .btn {
     background-color: #9dc284;
