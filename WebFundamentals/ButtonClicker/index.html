@@ -21,7 +21,7 @@
                     placeholder="search"
                     class="search-field"
                 />
-                <button class="btn">Login</button>
+                <button class="btn" onclick="changeLogin(this)">Login</button>
             </div>
             <div class="main">
                 <div class="main-left">
@@ -30,7 +30,12 @@
                             <h2>ninja</h2>
                             <p><i>noun</i></p>
                             <p>Plural: <i>ninjas</i></p>
-                            <button class="btn">13 likes</button>
+                            <button
+                                class="btn"
+                                onclick="alert('Ninja was liked')"
+                            >
+                                13 likes
+                            </button>
                         </div>
                         <div>
                             <p>
@@ -45,7 +50,12 @@
                             <h2>ninja</h2>
                             <p><i>noun</i></p>
                             <p>Plural: <i>ninjas</i></p>
-                            <button class="btn">37 likes</button>
+                            <button
+                                class="btn"
+                                onclick="alert('Ninja was liked')"
+                            >
+                                37 likes
+                            </button>
                         </div>
                         <div>
                             <p>
@@ -59,7 +69,9 @@
                 <div class="main-right">
                     <div class="box">
                         <h3>Dojonary is defined by <strong>YOU</strong></h3>
-                        <button class="btn">Add Definition</button>
+                        <button class="btn" onclick="removeButton(this)">
+                            Add Definition
+                        </button>
                     </div>
                 </div>
             </div>
