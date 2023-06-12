@@ -20,6 +20,9 @@
     box-shadow: 0.25rem 0.2rem 0 rgba(0, 0, 0, 1);
     border-radius: 2%;
 }
+.btn:hover {
+    cursor: pointer;
+}
 .row {
     display: flex;
     gap: 1.5rem; /* create space between the children without affecting the space from the parent*/
