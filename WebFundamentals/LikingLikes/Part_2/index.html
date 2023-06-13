@@ -12,7 +12,94 @@
         <link rel="stylesheet" href="style.css" />
         <title>Liking Likes</title>
     </head>
+
     <body>
+        <div class="container">
+            <div class="navbar">
+                <h1 class="site-name">Network</h1>
+            </div>
+
+            <div class="page-title">Your feed</div>
+
+            <div class="main">
+                <div class="main-left">
+                    <div class="box">
+                        <img
+                            src="Assets/jane-m.jpg"
+                            alt="Jane Doe"
+                            class="profile-img"
+                        />
+                        <p><a href="#" class="text">Add an Avatar</a></p>
+                        <h2 class="name">Jane Doe</h2>
+                    </div>
+                </div>
+
+                <div class="main-right">
+                    <div class="box">
+                        <div class="box-top">
+                            <div class="box-top-left">
+                                <h2 class="name">Evan S</h2>
+                            </div>
+                            <div class="box-top-right">
+                                <p class="text" id="likes-display1">
+                                    0 like(s)
+                                </p>
+                                <button class="btn" onclick="increaseLikes()">
+                                    Like
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text">
+                            The Denver Nuggets just won the NBA Finals. I only
+                            know that because my neighborhood has an obscene
+                            amount of fireworks going off right now
+                            <a href="#">audio</a>.
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-top">
+                            <div class="box-top-left">
+                                <h2 class="name">Nicole K</h2>
+                            </div>
+                            <div class="box-top-right">
+                                <p class="text" id="likes-display2">
+                                    0 like(s)
+                                </p>
+                                <button class="btn" onclick="increaseLikes()">
+                                    Like
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text">
+                            Just finished my new <a href="#">comic</a> tell me
+                            what you think.
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-top">
+                            <div class="box-top-left">
+                                <h2 class="name">Jim R</h2>
+                            </div>
+                            <div class="box-top-right">
+                                <p class="text" id="likes-display3">
+                                    0 like(s)
+                                </p>
+                                <button class="btn" onclick="increaseLikes()">
+                                    Like
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text">
+                            I can't stop listening to the
+                            <a href="#">new album</a>, anyone else?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="script.js"></script>
     </body>
 </html>
