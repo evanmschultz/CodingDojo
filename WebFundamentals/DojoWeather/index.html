@@ -34,7 +34,20 @@
 
         <div class="main">
             <div class="header">
-                <h2 class="font-size-2">San Jose</h2>
+                <div class="flex-1">
+                    <h2 class="font-size-2 flex-start">San Jose</h2>
+                </div>
+                <div class="flex-end align-center gap-1">
+                    <p class="font-size-4">show temperature in</p>
+                    <select
+                        name="temp-scale"
+                        id="temp-scale"
+                        class="font-size-4"
+                    >
+                        <option value="celcius">°C</option>
+                        <option value="farenheit">°F</option>
+                    </select>
+                </div>
             </div>
         </div>
 

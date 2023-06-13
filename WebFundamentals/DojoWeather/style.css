@@ -35,6 +35,9 @@
 .text-deco-none {
     text-decoration: none;
 }
+.site-links > a:focus {
+    font-size: 2.1rem;
+}
 
 /* navbar styling */
 .navbar {
@@ -51,7 +54,6 @@
 }
 .site-links {
     flex: 1;
-    /* width: 100%; */
     display: flex;
     justify-content: space-between;
 }
@@ -59,8 +61,34 @@
 /* body/content container styling */
 .main {
     padding: 1.5rem 15%;
-    /* border: 2px solid black; */
     height: 100%;
+}
+.header {
+    border-bottom: 0.2rem solid black;
+    border-radius: 4%;
+    padding-bottom: 1rem;
+    display: flex;
+}
+
+/* flex styling */
+.flex-1 {
+    flex: 1;
+    width: inherit;
+}
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+.flex-end {
+    display: flex;
+    width: inherit;
+    justify-content: flex-end;
+}
+.align-center {
+    align-items: center;
+}
+.gap-1 {
+    gap: 1rem;
 }
 
 /* box styling */
