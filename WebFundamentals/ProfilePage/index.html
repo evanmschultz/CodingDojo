@@ -56,7 +56,9 @@
                                 alt="gear-icon"
                                 class="icon"
                             />
-                            <a href="#">edit profile</a>
+                            <a href="#" onclick="changeName('#name')"
+                                >edit profile</a
+                            >
                         </p>
                     </div>
                 </div>
@@ -78,7 +80,7 @@
             <div class="main-right">
                 <div class="box" id="connection-requests">
                     <div class="top-bar">
-                        <span class="font-2" id="notification">2</span>
+                        <span class="font-2" id="notification-1">2</span>
                         <h2 class="font-2">Connection Requests</h2>
                     </div>
                     <div class="content-right">
@@ -96,12 +98,17 @@
                                 <img
                                     src="Assets/icons/accept-circle.png"
                                     alt="accept-circle"
-                                    class="img"
+                                    class="img button-img"
+                                    onclick="removeConnectionRequest('#request-1');
+                                    decreaseNotificationCount('#notification-1');
+                                    increaseConnectionsCount('#notification-2')"
                                 />
                                 <img
                                     src="Assets/icons/close-circle.png"
                                     alt="close-circle"
-                                    class="img"
+                                    class="img button-img"
+                                    onclick="removeConnectionRequest('#request-1'); 
+                                    decreaseNotificationCount('#notification-1');"
                                 />
                             </div>
                         </div>
@@ -119,12 +126,17 @@
                                 <img
                                     src="Assets/icons/accept-circle.png"
                                     alt="accept-circle"
-                                    class="img"
+                                    class="img button-img"
+                                    onclick="removeConnectionRequest('#request-2'); 
+                                    decreaseNotificationCount('#notification-1'); 
+                                    increaseConnectionsCount('#notification-2')"
                                 />
                                 <img
                                     src="Assets/icons/close-circle.png"
                                     alt="close-circle"
-                                    class="img"
+                                    class="img button-img"
+                                    onclick="removeConnectionRequest('#request-2'); 
+                                    decreaseNotificationCount('#notification-1')"
                                 />
                             </div>
                         </div>
@@ -132,7 +144,7 @@
                 </div>
                 <div class="box" id="connections">
                     <div class="top-bar">
-                        <span class="font-2" id="notification">500+</span>
+                        <span class="font-2" id="notification-2">500</span>
                         <h2 class="font-2">Your Connections</h2>
                     </div>
                     <div class="content-right">
@@ -167,5 +179,6 @@
                 </div>
             </div>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -72,7 +72,8 @@ h1 {
     color: #aaaaaa;
     margin-left: 2%;
 }
-#notification {
+#notification-1,
+#notification-2 {
     background-color: #aaaaaa;
     color: #333333;
     border-radius: 100%;
@@ -99,6 +100,9 @@ h1 {
 .img {
     height: 1.9rem;
     border-radius: 100%;
+}
+.button-img {
+    cursor: pointer;
 }
 #profile-img {
     margin: 4rem 2.3rem;
