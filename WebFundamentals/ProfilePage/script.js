@@ -1,8 +1,13 @@
 function changeName(nameId) {
     console.log(nameId)
-    usersName = document.querySelector(nameId)
+    usersNameElement = document.querySelector(nameId)
+    usersName = usersNameElement.innerText
     console.log(usersName)
-    usersName.innerText = "Philip J. Fry"
+    if (usersName == "Jane Doe") {
+        usersNameElement.innerText = "Philip J. Fry"
+    } else {
+        usersNameElement.innerText = "Jane Doe"
+    }
 }
 
 function removeConnectionRequest(requestId) {
