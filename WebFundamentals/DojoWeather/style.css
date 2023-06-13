@@ -1,0 +1,75 @@
+/* zero css */
+* {
+    margin: 0 auto;
+    border: 0;
+    padding: 0;
+    outline: 0;
+    font-family: "roboto", sans-serif;
+}
+
+/* font styling */
+.font-size-1 {
+    font-size: 3rem;
+}
+.font-size-2 {
+    font-size: 2.5rem;
+}
+.font-size-3 {
+    font-size: 2rem;
+}
+.font-size-4 {
+    font-size: 1.5rem;
+}
+.text-color-blue {
+    color: #3e78dd;
+}
+.text-color-red {
+    color: #be3b31;
+}
+.text-color-black {
+    color: black;
+}
+.text-color-white {
+    color: white;
+}
+.text-deco-none {
+    text-decoration: none;
+}
+
+/* navbar styling */
+.navbar {
+    padding: 1rem 15%;
+}
+.navbar {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    background-color: #a6c5f4;
+}
+.site-title {
+    flex: 1;
+}
+.site-links {
+    flex: 1;
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+}
+
+/* body/content container styling */
+.main {
+    padding: 1.5rem 15%;
+    /* border: 2px solid black; */
+    height: 100%;
+}
+
+/* box styling */
+.box {
+    padding: 1rem;
+    height: fit-content;
+    width: inherit;
+    margin: 1rem;
+}
+.main > .box-border {
+    border: 0.3rem solid black;
+}
