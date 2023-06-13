@@ -18,9 +18,9 @@
                 <h1>Profile</h1>
             </div>
             <div class="links" id="links">
-                <a href="#" class="font-3" id="nav-link">Home</a>
-                <a href="#" class="font-3" id="nav-link">My Profile</a>
-                <a href="#" class="font-3" id="nav-link">Find Connections</a>
+                <a href="#" class="font-3" id="nav-link-1">Home</a>
+                <a href="#" class="font-3" id="nav-link-2">My Profile</a>
+                <a href="#" class="font-3" id="nav-link-3">Find Connections</a>
             </div>
             <div>
                 <button class="font-2" id="button">Sign Out</button>
@@ -99,16 +99,13 @@
                                     src="Assets/icons/accept-circle.png"
                                     alt="accept-circle"
                                     class="img button-img"
-                                    onclick="removeConnectionRequest('#request-1');
-                                    decreaseNotificationCount('#notification-1');
-                                    increaseConnectionsCount('#notification-2')"
+                                    onclick="acceptRequest('#request-1', '#notification-1', '#notification-2')"
                                 />
                                 <img
                                     src="Assets/icons/close-circle.png"
                                     alt="close-circle"
                                     class="img button-img"
-                                    onclick="removeConnectionRequest('#request-1'); 
-                                    decreaseNotificationCount('#notification-1');"
+                                    onclick="rejectRequest('#request-1', '#notification-1')"
                                 />
                             </div>
                         </div>
@@ -127,16 +124,13 @@
                                     src="Assets/icons/accept-circle.png"
                                     alt="accept-circle"
                                     class="img button-img"
-                                    onclick="removeConnectionRequest('#request-2'); 
-                                    decreaseNotificationCount('#notification-1'); 
-                                    increaseConnectionsCount('#notification-2')"
+                                    onclick="acceptRequest('#request-2', '#notification-1', '#notification-2')"
                                 />
                                 <img
                                     src="Assets/icons/close-circle.png"
                                     alt="close-circle"
                                     class="img button-img"
-                                    onclick="removeConnectionRequest('#request-2'); 
-                                    decreaseNotificationCount('#notification-1')"
+                                    onclick="rejectRequest('#request-2', '#notification-1')"
                                 />
                             </div>
                         </div>
@@ -148,7 +142,7 @@
                         <h2 class="font-2">Your Connections</h2>
                     </div>
                     <div class="content-right">
-                        <div id="request-1">
+                        <div>
                             <div class="connection">
                                 <img
                                     src="Assets/images/todd-s.jpg"
@@ -160,7 +154,7 @@
 
                             <div class="request-response"></div>
                         </div>
-                        <div id="request-2">
+                        <div>
                             <div class="connection">
                                 <img
                                     src="Assets/images/todd-s.jpg"

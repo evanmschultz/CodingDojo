@@ -143,10 +143,15 @@ h1 {
 }
 .connection,
 .request-response {
-    /* border: 2px solid #333333; */
     display: table;
     width: 50%;
     vertical-align: middle;
+}
+.connection {
+    margin-left: 0.7rem;
+}
+.request-response {
+    margin-right: 1rem;
 }
 .connection > * {
     vertical-align: middle;

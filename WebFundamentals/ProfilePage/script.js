@@ -1,8 +1,8 @@
 function changeName(nameId) {
-    console.log(nameId)
+    // console.log(nameId)
     usersNameElement = document.querySelector(nameId)
     usersName = usersNameElement.innerText
-    console.log(usersName)
+    // console.log(usersName)
     if (usersName == "Jane Doe") {
         usersNameElement.innerText = "Philip J. Fry"
     } else {
@@ -32,4 +32,15 @@ function increaseConnectionsCount(counterId) {
     count = counterElement.innerText
     count++
     counterElement.innerText = count
+}
+
+function acceptRequest(requestId, requestsCounterId, connectionsCounterId) {
+    removeConnectionRequest(requestId)
+    decreaseNotificationCount(requestsCounterId)
+    increaseConnectionsCount(connectionsCounterId)
+}
+
+function rejectRequest(requestId, requestsCounterId) {
+    removeConnectionRequest(requestId)
+    decreaseNotificationCount(requestsCounterId)
 }
