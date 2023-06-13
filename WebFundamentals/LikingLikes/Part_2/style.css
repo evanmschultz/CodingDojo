@@ -1,0 +1,33 @@
+/* CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "roboto", sans-serif;
+}
+
+/* Fixed (based on percentage) width container class that will "auto-center" itself */
+.container {
+    width: 70%;
+    margin: 0 auto;
+}
+.box {
+    border: 0.2rem solid black;
+    width: 50%;
+    height: fit-content;
+    margin: 2rem 1rem;
+    border-radius: 0.5%;
+    padding: 2rem;
+    /* display: flex; */
+    /* flex-direction: column; */
+}
+.btn {
+    border: 0.2rem solid black;
+    background-color: #fad978;
+    color: #000;
+    font-size: x-large;
+    padding: 0.25rem 2rem;
+    box-shadow: 0.25rem 0.2rem 0 rgba(0, 0, 0, 1);
+    border-radius: 2%;
+    cursor: pointer;
+}
