@@ -10,11 +10,12 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="style.css" />
+        <script defer src="script.js"></script>
         <title>Dojo Weather</title>
     </head>
 
     <body>
-        <div class="navbar text-color-white">
+        <header class="navbar text-color-white">
             <div class="site-title">
                 <h1 class="font-size-1">DojoWeather</h1>
             </div>
@@ -30,14 +31,15 @@
                     Dallas
                 </a>
             </div>
-        </div>
+        </header>
 
-        <div class="main">
-            <div class="header">
+        <main class="main">
+            <section class="main-header">
                 <div class="flex-1">
                     <h2 class="font-size-2 flex-start">San Jose</h2>
                 </div>
-                <div class="flex-end align-center gap-1">
+
+                <div class="display-flex align-center gap-1">
                     <p class="font-size-4">show temperature in</p>
                     <select
                         name="temp-scale"
@@ -48,9 +50,78 @@
                         <option value="farenheit">°F</option>
                     </select>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <script src="script.js"></script>
+            <section class="content display-flex">
+                <div
+                    class="content-box flex-1 display-flex flex-column align-center margin-right-1"
+                >
+                    <h3 class="font-size-2 font-weight-400">Today</h3>
+                    <img
+                        src="Assets/some_rain.png"
+                        alt="some rain"
+                        class="content-img"
+                    />
+                    <p class="font-size-4">some rain</p>
+                    <div
+                        class="display-flex space-between width-100 font-size-3"
+                    >
+                        <p class="text-color-red">24°</p>
+                        <p class="text-color-blue">18°</p>
+                    </div>
+                </div>
+                <div
+                    class="content-box flex-1 display-flex flex-column align-center margin-right-1 margin-left-1"
+                >
+                    <h3 class="font-size-2 font-weight-400">Tomorrow</h3>
+                    <img
+                        src="Assets/some_sun.png"
+                        alt="some sun"
+                        class="content-img"
+                    />
+                    <p class="font-size-4">some sun</p>
+                    <div
+                        class="display-flex space-between width-100 font-size-3"
+                    >
+                        <p class="text-color-red">27°</p>
+                        <p class="text-color-blue">19°</p>
+                    </div>
+                </div>
+                <div
+                    class="content-box flex-1 display-flex flex-column align-center margin-right-1 margin-left-1"
+                >
+                    <h3 class="font-size-2 font-weight-400">Friday</h3>
+                    <img
+                        src="Assets/some_clouds.png"
+                        alt="some clouds"
+                        class="content-img"
+                    />
+                    <p class="font-size-4">some clouds</p>
+                    <div
+                        class="display-flex space-between width-100 font-size-3"
+                    >
+                        <p class="text-color-red">21°</p>
+                        <p class="text-color-blue">16°</p>
+                    </div>
+                </div>
+                <div
+                    class="content-box flex-1 display-flex flex-column align-center margin-left-1"
+                >
+                    <h3 class="font-size-2 font-weight-400">Saturday</h3>
+                    <img
+                        src="Assets/some_sun.png"
+                        alt="some sun"
+                        class="content-img"
+                    />
+                    <p class="font-size-4">some sun</p>
+                    <div
+                        class="display-flex space-between width-100 font-size-3"
+                    >
+                        <p class="text-color-red">26°</p>
+                        <p class="text-color-blue">21°</p>
+                    </div>
+                </div>
+            </section>
+        </main>
     </body>
 </html>
