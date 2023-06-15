@@ -21,13 +21,25 @@
             </div>
 
             <div class="site-links">
-                <a href="#" class="font-size-3 text-deco-none text-color-white">
+                <a
+                    href="#"
+                    class="font-size-3 text-deco-none text-color-white"
+                    onclick="alert('Loading weather report...')"
+                >
                     Burbank
                 </a>
-                <a href="#" class="font-size-3 text-deco-none text-color-white">
+                <a
+                    href="#"
+                    class="font-size-3 text-deco-none text-color-white"
+                    onclick="alert('Loading weather report...')"
+                >
                     Chicago
                 </a>
-                <a href="#" class="font-size-3 text-deco-none text-color-white">
+                <a
+                    href="#"
+                    class="font-size-3 text-deco-none text-color-white"
+                    onclick="alert('Loading weather report...')"
+                >
                     Dallas
                 </a>
             </div>
@@ -46,6 +58,7 @@
                         name="temp-scale"
                         id="temp-scale"
                         class="font-size-4"
+                        onchange="updateTempScale()"
                     >
                         <option value="celcius">°C</option>
                         <option value="farenheit">°F</option>
@@ -68,8 +81,12 @@
                     <div
                         class="display-flex space-between width-100 font-size-3"
                     >
-                        <p class="text-color-red">24°</p>
-                        <p class="text-color-blue">18°</p>
+                        <p class="text-color-red" data-type="temp" id="temp-1">
+                            24°
+                        </p>
+                        <p class="text-color-blue" data-type="temp" id="temp-2">
+                            18°
+                        </p>
                     </div>
                 </div>
                 <div
@@ -86,8 +103,12 @@
                     <div
                         class="display-flex space-between width-100 font-size-3"
                     >
-                        <p class="text-color-red">27°</p>
-                        <p class="text-color-blue">19°</p>
+                        <p class="text-color-red" data-type="temp" id="temp-3">
+                            27°
+                        </p>
+                        <p class="text-color-blue" data-type="temp" id="temp-4">
+                            19°
+                        </p>
                     </div>
                 </div>
                 <div
@@ -104,8 +125,12 @@
                     <div
                         class="display-flex space-between width-100 font-size-3"
                     >
-                        <p class="text-color-red">21°</p>
-                        <p class="text-color-blue">16°</p>
+                        <p class="text-color-red" data-type="temp" id="temp-5">
+                            21°
+                        </p>
+                        <p class="text-color-blue" data-type="temp" id="temp-6">
+                            16°
+                        </p>
                     </div>
                 </div>
                 <div
@@ -122,13 +147,17 @@
                     <div
                         class="display-flex space-between width-100 font-size-3"
                     >
-                        <p class="text-color-red">26°</p>
-                        <p class="text-color-blue">21°</p>
+                        <p class="text-color-red" data-type="temp" id="temp-7">
+                            26°
+                        </p>
+                        <p class="text-color-blue" data-type="temp" id="temp-8">
+                            21°
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <div class="alert display-flex">
+            <div class="alert display-flex" id="cookie-alert">
                 <div class="flex-1">
                     <img
                         src="Assets/cookie.png"
@@ -147,7 +176,12 @@
                     </p>
                 </div>
                 <div class="flex-2 display-flex justify-center">
-                    <button class="btn">I accept</button>
+                    <button
+                        class="btn font-weight-300"
+                        onclick="removeAlert('cookie-alert')"
+                    >
+                        I accept
+                    </button>
                 </div>
             </div>
         </main>
