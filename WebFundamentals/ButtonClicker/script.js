@@ -10,4 +10,5 @@ function changeLogin(element) {
 function removeButton(element) {
     console.log("removeButton called")
     element.remove()
+    // this is a comment
 }
