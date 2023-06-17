@@ -3,7 +3,7 @@
     "food" it should console log "yummy". If "food" was not present in the 
     array console log "I'm hungry" once.
 */
-console.log("challeng 1\n")
+console.log("challenge 1\n")
 function alwaysHungry(array) {
     let hasFood = false
 
@@ -29,7 +29,7 @@ alwaysHungry([4, 1, 5, 7, 2])
     2) Given an array and a value cutoff, return a new array containing only 
     the values larger than cutoff. 
 */
-console.log("\nchalleng \n")
+console.log("\nchallenge 2\n")
 function highPassFilter(array, minimum) {
     let tempArray = []
 
@@ -50,7 +50,7 @@ console.log(
 /*  
     3) Given an array of numbers return a count of how many of the numbers are larger than the average.
 */
-console.log("\nchalleng 3\n")
+console.log("\nchallenge 3\n")
 function betterThanAverage(array) {
     let sum = 0
 
@@ -74,7 +74,7 @@ let averageResult = betterThanAverage([6, 8, 3, 10, -2, 5, 9])
 console.log(`there are ${averageResult} numbers above the average`) // expect back 4
 
 /* 4) Write a function that will reverse the values an array and return them. */
-console.log("\nchalleng 4\n")
+console.log("\nchallenge 4\n")
 function reverseArray(array) {
     // use pointers: python a, b = b, a // JS doesn't have that without using an array, use temp variable
     left = 0
