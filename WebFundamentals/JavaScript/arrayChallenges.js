@@ -29,7 +29,7 @@ alwaysHungry([4, 1, 5, 7, 2])
     2) Given an array and a value cutoff, return a new array containing only 
     the values larger than cutoff. 
 */
-console.log("\nchalleng 2\n")
+console.log("\nchalleng \n")
 function highPassFilter(array, minimum) {
     let tempArray = []
 
@@ -72,3 +72,26 @@ function betterThanAverage(array) {
 
 let averageResult = betterThanAverage([6, 8, 3, 10, -2, 5, 9])
 console.log(`there are ${averageResult} numbers above the average`) // expect back 4
+
+/* 4) Write a function that will reverse the values an array and return them. */
+console.log("\nchalleng 4\n")
+function reverseArray(array) {
+    // use pointers: python a, b = b, a // JS doesn't have that without using an array, use temp variable
+    left = 0
+    right = array.length - 1
+
+    while (left < right) {
+        tempValue = array[left]
+
+        array[left] = array[right]
+        array[right] = tempValue
+
+        left++
+        right--
+    }
+
+    return array
+}
+
+let reverseResult = reverseArray(["a", "b", "c", "d", "e"])
+console.log(`the reversed array is [${reverseResult}]`) // expect back ["e", "d", "c", "b", "a"]
