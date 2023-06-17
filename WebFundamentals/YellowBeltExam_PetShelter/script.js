@@ -1,7 +1,8 @@
 function removeElement(id) {
+    console.log("called")
     let element = document.getElementById(id)
 
-    element.remove
+    element.remove()
 }
 
 function alertType(name) {
