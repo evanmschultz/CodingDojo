@@ -1,20 +1,15 @@
+/* Credit for most of the code goes to Gary Ang - https://github.com/playgrdstar/lorenz_threejs */
+
 // Grab the canvas from the HTML document
 var myCanvas = document.getElementById("myCanvas")
-
-// Get the size of the canvas
-function getCanvasSize() {
-    var rect = myCanvas.getBoundingClientRect()
-    return { width: rect.width, height: rect.height }
-}
 
 // Setting up the scene
 var scene = new THREE.Scene()
 
 // Setting up a camera
-var canvasSize = getCanvasSize()
 var camera = new THREE.PerspectiveCamera(
     100,
-    canvasSize.width / canvasSize.height,
+    myCanvas.clientWidth / myCanvas.clientHeight,
     0.1,
     50
 )
@@ -26,8 +21,8 @@ var renderer = new THREE.WebGLRenderer({
     canvas: myCanvas, // Pass the canvas element to the renderer
 })
 renderer.setPixelRatio(window.devicePixelRatio)
-renderer.setSize(canvasSize.width, canvasSize.height)
-renderer.setClearColor(0x111111, 1) // Change the background color to black
+renderer.setSize(myCanvas.clientWidth, myCanvas.clientHeight)
+renderer.setClearColor(0x111111, 1)
 
 // Setting up a light
 var light = new THREE.PointLight("#9BC995", 1, 1000)
@@ -46,7 +41,7 @@ var geometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(100000))
 
 // Generating a cloud of points
 var pcMat = new THREE.PointsMaterial({
-    color: new THREE.Color(0xcccdd),
+    color: new THREE.Color(0x999ccc),
     transparent: true,
     size: 0.05,
     blending: THREE.AdditiveBlending,
@@ -93,10 +88,9 @@ var render = function () {
 window.addEventListener(
     "resize",
     function () {
-        var canvasSize = getCanvasSize()
-        camera.aspect = canvasSize.width / canvasSize.height
+        camera.aspect = myCanvas.clientWidth / myCanvas.clientHeight
         camera.updateProjectionMatrix()
-        renderer.setSize(canvasSize.width, canvasSize.height)
+        renderer.setSize(myCanvas.clientWidth, myCanvas.clientHeight)
     },
     false
 )
@@ -105,10 +99,10 @@ render()
 
 function lorenz() {
     var arrayCurve = []
-    var x = 0.01,
-        y = 0.01,
-        z = 0.01
-    var a = 0.9
+    var x = 0.1,
+        y = 0.1,
+        z = 0.1
+    var a = 0.2
     var b = 3.4
     var f = 9.9
     var g = 1
