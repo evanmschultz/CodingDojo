@@ -4,7 +4,7 @@ function removeAlert(alertId) {
 }
 
 function updateTempScale() {
-    let temps = document.querySelectorAll("[data-type='temp'")
+    let temps = document.querySelectorAll("[data-type='temp']")
     let selectElement = document.getElementById("temp-scale")
     let selectedScale = selectElement.value
 
