@@ -1,11 +1,37 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+.game-board {
+    margin: 50px auto;
+    width: 260px;
+    height: 208px;
+    position: relative; /* position relative to allow absolute for pac-man */
+}
+.row {
+    display: flex;
+    justify-content: center;
+}
 .row div {
     width: 20px;
     height: 20px;
-    border: 1px solid black;
-    display: inline-block;
+    margin: 2px;
+    border: 1px solid #aaa;
 }
 .brick {
     background-color: blue;
 }
 .coin {
+    background: url(Assets/coin.gif) no-repeat center;
+    background-size: 15px;
+}
+#pac-man {
+    background: url(Assets/pac-man.gif) no-repeat center;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3px; /* add 26px to top and left to move square */
+    left: 3px;
 }
