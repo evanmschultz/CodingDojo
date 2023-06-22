@@ -38,6 +38,9 @@ let pacManPosition = {
     y: 3,
 }
 
+// set starting position
+displayPacMan(pacManPosition.x, pacManPosition.y)
+
 function displayPacMan(x, y) {
     // named with let to make it clear it is being updated
     let pacMan = document.getElementById("pac-man")
