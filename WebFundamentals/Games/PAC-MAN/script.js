@@ -4,7 +4,8 @@ let world = [
     [2, 2, 0, 2, 0, 0, 0, 2, 2, 2],
     [2, 2, 0, 0, 2, 2, 0, 2, 1, 2],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-    [2, 2, 2, 2, 2, 1, 2, 0, 2, 2],
+    [2, 0, 0, 0, 2, 0, 0, 0, 2, 2],
+    [2, 2, 2, 2, 0, 1, 2, 0, 0, 2],
     [2, 1, 0, 0, 0, 0, 2, 0, 1, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 ]
@@ -80,39 +81,35 @@ document.onkeydown = function (event) {
     let pacManX = pacManPosition.x
     let pacManY = pacManPosition.y
 
-    if (key == "ArrowRight") {
+    if (key == "ArrowRight" && world[pacManY][pacManX + 1] != 2) {
         // add one to check for collision or move right one, displayPacMan()
         pacManX++
 
-        if (world[pacManY][pacManX] == 2) {
-            // undo add and exit function because of collision
-            pacManX--
+        // check if leaving maze
+        if (pacManX > world[0].length) {
+            console.log("map complete")
             return
         }
-    } else if (key == "ArrowLeft") {
+    } else if (
+        key == "ArrowLeft" &&
+        world[pacManY][pacManX - 1] != 2 &&
+        pacManX - 1 >= 0
+    ) {
         // subtract one to check for collision move left one, displayPacMan()
         pacManX--
 
-        if (world[pacManY][pacManX] == 2) {
-            pacManX++ // undo subtract and exit function
-            return
+        // check if leaving maze
+        if (pacManX < 0) {
+            // if the move is left of the maze
+            console.log("off map left")
         }
-    } else if (key == "ArrowUp") {
+    } else if (key == "ArrowUp" && world[pacManY - 1][pacManX] != 2) {
+        console.log("called")
         // subtract because it is distance from the top, move up
         pacManY--
-
-        if (world[pacManY][pacManX] == 2) {
-            pacManY++
-            return
-        }
-    } else if (key == "ArrowDown") {
+    } else if (key == "ArrowDown" && world[pacManY + 1][pacManX] != 2) {
         // add because it is distance from the top, move down
         pacManY++
-
-        if (world[pacManY][pacManX] == 2) {
-            pacManY--
-            return
-        }
     }
 
     displayPacMan(pacManX, pacManY) // update display
