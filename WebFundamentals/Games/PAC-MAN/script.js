@@ -34,12 +34,10 @@ function displayWorld() {
 displayWorld()
 
 let pacManPosition = {
-    x: 1,
-    y: 1,
+    x: 0,
+    y: 4,
 }
-
-// set starting position
-displayPacMan(pacManPosition.x, pacManPosition.y)
+let coinCount = 0
 
 function displayPacMan(x, y) {
     // named with let to make it clear it is being updated
@@ -52,6 +50,27 @@ function displayPacMan(x, y) {
     // update the styling
     pacMan.style.top = `${pacManPosition.y * 26 + 3}px`
     pacMan.style.left = `${pacManPosition.x * 26 + 3}px`
+
+    checkForCoin()
+}
+
+// set starting position
+displayPacMan(pacManPosition.x, pacManPosition.y)
+
+function checkForCoin() {
+    const pacManX = pacManPosition.x
+    const pacManY = pacManPosition.y
+
+    if (world[pacManY][pacManX] == 1) {
+        let coinCountDisplay = document.getElementById("coin-count")
+        coinCount++
+
+        coinCountDisplay.innerText = `Coin Count: ${coinCount}` // update count on screen
+
+        world[pacManY][pacManX] = 0 // remove coin
+
+        displayWorld() // refresh world
+    }
 }
 
 document.onkeydown = function (event) {
