@@ -34,8 +34,8 @@ function displayWorld() {
 displayWorld()
 
 let pacManPosition = {
-    x: 3,
-    y: 3,
+    x: 1,
+    y: 1,
 }
 
 // set starting position
@@ -50,26 +50,51 @@ function displayPacMan(x, y) {
     pacManPosition.y = y
 
     // update the styling
-    pacMan.style.top = `${pacManPosition.y}px`
-    pacMan.style.left = `${pacManPosition.x}px`
+    pacMan.style.top = `${pacManPosition.y * 26 + 3}px`
+    pacMan.style.left = `${pacManPosition.x * 26 + 3}px`
 }
 
 document.onkeydown = function (event) {
     const key = event.key
 
     // get the integer value of the current position
-    let pacManTop = pacManPosition.y
-    let pacManLeft = pacManPosition.x
+    let pacManX = pacManPosition.x
+    let pacManY = pacManPosition.y
 
     if (key == "ArrowRight") {
-        pacManLeft += 26 // move right one block
+        // add one to check for collision or move right one, displayPacMan()
+        pacManX++
+
+        if (world[pacManY][pacManX] == 2) {
+            // undo add and exit function because of collision
+            pacManX--
+            return
+        }
     } else if (key == "ArrowLeft") {
-        pacManLeft -= 26 // move left one block
+        // subtract one to check for collision move left one, displayPacMan()
+        pacManX--
+
+        if (world[pacManY][pacManX] == 2) {
+            pacManX++ // undo subtract and exit function
+            return
+        }
     } else if (key == "ArrowUp") {
-        pacManTop -= 26 // subtract because it is distance from the top, move up
+        // subtract because it is distance from the top, move up
+        pacManY--
+
+        if (world[pacManY][pacManX] == 2) {
+            pacManY++
+            return
+        }
     } else if (key == "ArrowDown") {
-        pacManTop += 26 // add because it is distance from the top, move down
+        // add because it is distance from the top, move down
+        pacManY++
+
+        if (world[pacManY][pacManX] == 2) {
+            pacManY--
+            return
+        }
     }
 
-    displayPacMan(pacManLeft, pacManTop) // update display
+    displayPacMan(pacManX, pacManY) // update display
 }
