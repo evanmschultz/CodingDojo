@@ -3,8 +3,25 @@ body {
     padding: 0;
     background-color: black;
 }
+h1,
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+.title {
+    padding-top: 20px;
+    color: #fff;
+    text-align: center;
+}
+.score {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .game-board {
-    margin: 50px auto;
+    margin: 25px auto;
     width: 260px;
     height: 208px;
     /* position relative to allow absolute for pac-man */
