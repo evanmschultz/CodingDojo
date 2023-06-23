@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <title>PAC-MAN</title>
-    </head>
-    <body>
-        <div class="title">
-            <h1>Pacman</h1>
-            <p>use arrow keys to control him</p>
-        </div>
-        <div class="game-board">
-            <div id="world"></div>
-            <div id="pac-man"></div>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>PAC-MAN</title>
+	</head>
+	<body>
+		<div class="title">
+			<h1>Pacman</h1>
+			<p>use arrow keys to control him</p>
+		</div>
+		<div class="game-board">
+			<div id="world"></div>
+			<div id="pac-man"></div>
+			<div class="ghost" id="ghost1"></div>
+		</div>
 
-        <div class="score">
-            <h2 id="coin-count">Coin Count: 0</h2>
-        </div>
+		<div class="score">
+			<h2 id="score">Score: 0</h2>
+		</div>
 
-        <script src="script.js"></script>
-    </body>
+		<script src="script.js"></script>
+	</body>
 </html>

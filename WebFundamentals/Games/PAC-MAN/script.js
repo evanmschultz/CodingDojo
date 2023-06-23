@@ -1,116 +1,173 @@
 let world = [
-    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [2, 1, 0, 2, 1, 2, 0, 1, 0, 0],
-    [2, 2, 0, 2, 0, 0, 0, 2, 2, 2],
-    [2, 2, 0, 0, 2, 2, 0, 2, 1, 2],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
-    [2, 0, 0, 0, 2, 0, 0, 0, 2, 2],
-    [2, 2, 2, 2, 0, 1, 2, 0, 0, 2],
-    [2, 1, 0, 0, 0, 0, 2, 0, 1, 2],
-    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+	[2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+	[2, 1, 0, 2, 1, 2, 0, 1, 0, 0],
+	[2, 2, 0, 2, 0, 0, 0, 2, 2, 2],
+	[2, 2, 0, 0, 2, 2, 0, 2, 1, 2],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	[2, 0, 0, 0, 2, 0, 0, 0, 2, 2],
+	[2, 2, 2, 2, 0, 1, 2, 0, 0, 2],
+	[2, 1, 0, 0, 0, 0, 2, 0, 1, 2],
+	[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 ]
 
 function displayWorld() {
-    let output = ""
+	let output = ''
 
-    for (i = 0; i < world.length; i++) {
-        output += '<div class="row">\n' // create row opening tag
+	for (i = 0; i < world.length; i++) {
+		output += '<div class="row">\n' // create row opening tag
 
-        for (j = 0; j < world[i].length; j++) {
-            if (world[i][j] == 2) {
-                output += '\t<div class="brick"></div>\n' // add brick div
-            } else if (world[i][j] == 1) {
-                output += '\t<div class="coin"></div>\n' // add coin div
-            } else {
-                output += '\t<div class="empty"></div>\n' // add empty div
-            }
-        }
+		for (j = 0; j < world[i].length; j++) {
+			if (world[i][j] == 2) {
+				output += '\t<div class="brick"></div>\n' // add brick div
+			} else if (world[i][j] == 1) {
+				output += '\t<div class="coin"></div>\n' // add coin div
+			} else {
+				output += '\t<div class="empty"></div>\n' // add empty div
+			}
+		}
 
-        output += "</div>\n" // close row tag
-    }
-    // console.log(output)
-    document.getElementById("world").innerHTML = output // pass output to document
+		output += '</div>\n' // close row tag
+	}
+	// console.log(output)
+	document.getElementById('world').innerHTML = output // pass output to document
 }
-
 displayWorld()
 
-let pacManPosition = {
-    x: 0,
-    y: 4,
+let pacmanPosition = {
+	x: 0,
+	y: 4
 }
-let coinCount = 0
+function displayPacman(x, y) {
+	// named with let to make it clear it is being updated
+	let pacman = document.getElementById('pac-man')
 
-function displayPacMan(x, y) {
-    // named with let to make it clear it is being updated
-    let pacMan = document.getElementById("pac-man")
+	// update current position in position object
+	pacmanPosition.x = x
+	pacmanPosition.y = y
 
-    // update current position in position object
-    pacManPosition.x = x
-    pacManPosition.y = y
+	// update the styling
+	pacman.style.top = `${pacmanPosition.y * 26 + 3}px`
+	pacman.style.left = `${pacmanPosition.x * 26 + 3}px`
 
-    // update the styling
-    pacMan.style.top = `${pacManPosition.y * 26 + 3}px`
-    pacMan.style.left = `${pacManPosition.x * 26 + 3}px`
+	checkForCoin()
+}
+// set pacman starting position
+displayPacman(pacmanPosition.x, pacmanPosition.y)
 
-    checkForCoin()
+let ghostPosition = {
+	x: 5,
+	y: 4
+}
+function displayGhost() {
+	let ghost1 = document.getElementById('ghost1')
+
+	ghost1.style.backgroundImage = 'url(Assets/ghost1.png)'
+
+	ghost1.style.top = `${ghostPosition.y * 26 + 3}px`
+	ghost1.style.left = `${ghostPosition.x * 26 + 3}px`
 }
 
-// set starting position
-displayPacMan(pacManPosition.x, pacManPosition.y)
+const ghostDirectionOptions = ['left', 'right', 'up', 'down']
+function moveGhost() {
+	const directionIndex = Math.round(
+		Math.random() * ghostDirectionOptions.length
+	)
+	const direction = ghostDirectionOptions[directionIndex]
+	let ghostY = ghostPosition.y
+	let ghostX = ghostPosition.x
 
+	if (
+		direction == 'left' &&
+		checkForCollision(ghostY, ghostX - 1) &&
+		ghostX - 1 >= 0
+	) {
+		ghostX--
+	} else if (
+		direction == 'right' &&
+		checkForCollision(ghostY, ghostX + 1) &&
+		ghostX + 1 < world[0].length
+	) {
+		ghostX++
+	} else if (direction == 'up' && checkForCollision(ghostY - 1, ghostX)) {
+		ghostY--
+	} else if (direction == 'down' && checkForCollision(ghostY + 1, ghostX)) {
+		ghostY++
+	} else {
+		moveGhost()
+	}
+
+	ghostPosition.y = ghostY
+	ghostPosition.x = ghostX
+	displayGhost()
+}
+
+setTimeout(() => {
+	displayGhost()
+	setInterval(moveGhost, 500)
+}, 1000)
+
+let score = 0
 function checkForCoin() {
-    const pacManX = pacManPosition.x
-    const pacManY = pacManPosition.y
+	const pacmanX = pacmanPosition.x
+	const pacmanY = pacmanPosition.y
 
-    if (world[pacManY][pacManX] == 1) {
-        let coinCountDisplay = document.getElementById("coin-count")
-        coinCount++
+	if (world[pacmanY][pacmanX] == 1) {
+		let scoreDisplay = document.getElementById('coin-count')
+		score += 10
 
-        coinCountDisplay.innerText = `Coin Count: ${coinCount}` // update count on screen
+		scoreDisplay.innerText = `Coin Count: ${score}` // update count on screen
 
-        world[pacManY][pacManX] = 0 // remove coin
+		world[pacmanY][pacmanX] = 0 // remove coin
 
-        displayWorld() // refresh world
-    }
+		displayWorld() // refresh world
+	}
 }
 
+function checkForCollision(y, x) {
+	if (world[y][x] != 2) {
+		return true
+	}
+	return false
+}
+
+// control pacman movement
 document.onkeydown = function (event) {
-    const key = event.key
+	const key = event.key
 
-    // get the integer value of the current position
-    let pacManX = pacManPosition.x
-    let pacManY = pacManPosition.y
+	// get the integer value of the current position
+	let pacmanX = pacmanPosition.x
+	let pacmanY = pacmanPosition.y
 
-    if (key == "ArrowRight" && world[pacManY][pacManX + 1] != 2) {
-        // add one to check for collision or move right one, displayPacMan()
-        pacManX++
+	if (
+		key == 'ArrowRight' &&
+		checkForCollision(pacmanY, pacmanX + 1) &&
+		pacmanX + 1 <= world[0].length
+	) {
+		pacmanX++
 
-        // check if leaving maze
-        if (pacManX > world[0].length) {
-            console.log("map complete")
-            return
-        }
-    } else if (
-        key == "ArrowLeft" &&
-        world[pacManY][pacManX - 1] != 2 &&
-        pacManX - 1 >= 0
-    ) {
-        // subtract one to check for collision move left one, displayPacMan()
-        pacManX--
+		// check if leaving maze
+		if (pacmanX > world[0].length - 1) {
+			console.log('map complete')
+		}
+	} else if (
+		key == 'ArrowLeft' &&
+		checkForCollision(pacmanY, pacmanX - 1) &&
+		pacmanX - 1 >= 0
+	) {
+		// subtract one to check for collision move left one, displayPacman()
+		pacmanX--
+	} else if (key == 'ArrowUp' && checkForCollision(pacmanY - 1, pacmanX)) {
+		// subtract because it is distance from the top, move up
+		pacmanY--
+	} else if (key == 'ArrowDown' && checkForCollision(pacmanY + 1, pacmanX)) {
+		// add because it is distance from the top, move down
+		pacmanY++
+	}
 
-        // check if leaving maze
-        if (pacManX < 0) {
-            // if the move is left of the maze
-            console.log("off map left")
-        }
-    } else if (key == "ArrowUp" && world[pacManY - 1][pacManX] != 2) {
-        console.log("called")
-        // subtract because it is distance from the top, move up
-        pacManY--
-    } else if (key == "ArrowDown" && world[pacManY + 1][pacManX] != 2) {
-        // add because it is distance from the top, move down
-        pacManY++
-    }
-
-    displayPacMan(pacManX, pacManY) // update display
+	displayPacman(pacmanX, pacmanY) // update display
 }
+
+// refactor to have a function that checks collision so it works for the ghost as well
+// add displayGhost() with timer that moves it
+// make pacman turn direction of travel
+// add cherry, worth 50 points, change coins to be worth 10, change coin count to score

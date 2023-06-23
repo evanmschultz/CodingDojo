@@ -1,53 +1,63 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
+	margin: 0;
+	padding: 0;
+	background-color: black;
 }
 h1,
 h2,
 p {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 .title {
-    padding-top: 20px;
-    color: #fff;
-    text-align: center;
+	padding-top: 20px;
+	color: #fff;
+	text-align: center;
 }
 .score {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 40px;
 }
 .game-board {
-    margin: 25px auto;
-    width: 260px;
-    height: 208px;
-    /* position relative to allow absolute for pac-man */
-    position: relative;
+	margin: 25px auto;
+	vertical-align: middle;
+	width: 260px;
+	height: 208px;
+	/* position relative to allow absolute for pac-man */
+	position: relative;
 }
 .row {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .row div {
-    width: 20px;
-    height: 20px;
-    margin: 2px;
-    border: 1px solid #aaa;
+	width: 20px;
+	height: 20px;
+	margin: 2px;
+	border: 1px solid #aaa;
 }
 .brick {
-    background-color: blue;
+	background-color: blue;
 }
 .coin {
-    background: url(Assets/coin.gif) no-repeat center;
-    background-size: 15px;
+	background: url(Assets/coin.gif) no-repeat center;
+	background-size: 15px;
 }
 #pac-man {
-    background: url(Assets/pac-man.gif) no-repeat center;
-    background-size: cover;
-    width: 20px;
-    height: 20px;
-    position: absolute;
+	background: url(Assets/pac-man.gif) no-repeat center;
+	background-size: cover;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+}
+.ghost {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	width: 20px;
+	height: 20px;
+	position: absolute;
 }
