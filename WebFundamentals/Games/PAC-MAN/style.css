@@ -47,8 +47,7 @@ p {
 	background-size: 15px;
 }
 .cherries {
-	background-repeat: no-repeat;
-	background-position: center;
+	background: url(Assets/cherries.png) no-repeat center;
 	background-size: 15px;
 }
 #pac-man {

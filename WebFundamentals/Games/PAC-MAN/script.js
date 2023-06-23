@@ -17,7 +17,9 @@ function displayWorld() {
 		output += '<div class="row">\n' // create row opening tag
 
 		for (j = 0; j < world[i].length; j++) {
-			if (world[i][j] == 2) {
+			if (world[i][j] == 3) {
+				output += '\t<div class="cherries"></div>\n' // add coin div
+			} else if (world[i][j] == 2) {
 				output += '\t<div class="brick"></div>\n' // add brick div
 			} else if (world[i][j] == 1) {
 				output += '\t<div class="coin"></div>\n' // add coin div
@@ -85,19 +87,19 @@ function moveGhost() {
 
 	if (
 		direction == 'left' &&
-		checkForCollision(ghostY, ghostX - 1) &&
+		!checkForCollision(ghostY, ghostX - 1) &&
 		ghostX - 1 >= 0
 	) {
 		ghostX--
 	} else if (
 		direction == 'right' &&
-		checkForCollision(ghostY, ghostX + 1) &&
+		!checkForCollision(ghostY, ghostX + 1) &&
 		ghostX + 1 < world[0].length
 	) {
 		ghostX++
-	} else if (direction == 'up' && checkForCollision(ghostY - 1, ghostX)) {
+	} else if (direction == 'up' && !checkForCollision(ghostY - 1, ghostX)) {
 		ghostY--
-	} else if (direction == 'down' && checkForCollision(ghostY + 1, ghostX)) {
+	} else if (direction == 'down' && !checkForCollision(ghostY + 1, ghostX)) {
 		ghostY++
 	} else {
 		moveGhost()
@@ -117,28 +119,38 @@ let ghostTimeout = setTimeout(() => {
 	ghostInterval = setInterval(moveGhost, 200)
 }, 5000)
 
+let cherriesExist = false
+let cherriesTimeout = setTimeout(() => {
+	cherriesExist = true
+	world[1][2] = 3
+	displayWorld()
+}, 10000)
+
 let score = 0
 function checkForCoin() {
 	const pacmanX = pacmanPosition.x
 	const pacmanY = pacmanPosition.y
 
-	if (world[pacmanY][pacmanX] == 1) {
+	if (world[pacmanY][pacmanX] == 1 || world[pacmanY][pacmanX] == 3) {
 		let scoreDisplay = document.getElementById('score')
-		score += 10
+
+		if (world[pacmanY][pacmanX] == 1) {
+			score += 10
+		} else {
+			score += 50
+		}
 
 		scoreDisplay.innerText = `Score: ${score}` // update count on screen
-
 		world[pacmanY][pacmanX] = 0 // remove coin
-
 		displayWorld() // refresh world
 	}
 }
 
 function checkForCollision(y, x) {
 	if (world[y][x] != 2) {
-		return true
+		return false
 	}
-	return false
+	return true
 }
 
 function checkForCollisionWithGhost() {
@@ -161,7 +173,7 @@ document.onkeydown = function (event) {
 
 	if (
 		key == 'ArrowRight' &&
-		checkForCollision(pacmanY, pacmanX + 1) &&
+		!checkForCollision(pacmanY, pacmanX + 1) &&
 		pacmanX + 1 <= world[0].length
 	) {
 		pacmanX++
@@ -171,22 +183,22 @@ document.onkeydown = function (event) {
 		// check if leaving maze
 		if (pacmanX > world[0].length - 1) {
 			endGame(
-				`Pacman reached the other side. Game over!\nYour score: ${score}`
+				`Pacman reached the other side. You win!\nYour score: ${score}`
 			)
 		}
 	} else if (
 		key == 'ArrowLeft' &&
-		checkForCollision(pacmanY, pacmanX - 1) &&
+		!checkForCollision(pacmanY, pacmanX - 1) &&
 		pacmanX - 1 >= 0
 	) {
 		// subtract one to check for collision move left one, displayPacman()
 		pacmanX--
 		pacman.style.transform = 'rotate(180deg)'
-	} else if (key == 'ArrowUp' && checkForCollision(pacmanY - 1, pacmanX)) {
+	} else if (key == 'ArrowUp' && !checkForCollision(pacmanY - 1, pacmanX)) {
 		// subtract because it is distance from the top, move up
 		pacmanY--
 		pacman.style.transform = 'rotate(270deg)'
-	} else if (key == 'ArrowDown' && checkForCollision(pacmanY + 1, pacmanX)) {
+	} else if (key == 'ArrowDown' && !checkForCollision(pacmanY + 1, pacmanX)) {
 		// add because it is distance from the top, move down
 		pacmanY++
 		pacman.style.transform = 'rotate(90deg)'
@@ -209,19 +221,26 @@ function endGame(message) {
 	score = 0
 	ghost.style.backgroundImage = 'none'
 	ghostExists = false
+	cherriesExist = false
+	world[1][2] = 0
 
 	displayPacman(pacmanPosition.x, pacmanPosition.y)
 	displayWorld()
 	clearTimeout(ghostTimeout)
-	clearInterval(ghostInterval) // Clear the interval
-	displayGhost
+	clearInterval(ghostInterval)
+	clearTimeout(cherriesTimeout)
+	displayGhost()
+
 	ghostTimeout = setTimeout(() => {
 		ghostExists = true
 		displayGhost()
 		// Save the reference to your new interval in the ghostInterval variable
 		ghostInterval = setInterval(moveGhost, 200)
 	}, 5000)
-}
 
-// end game if get hit by ghost
-// add cherry, worth 50 points, change coins to be worth 10, change coin count to score
+	cherriesTimeout = setTimeout(() => {
+		cherriesExist = true
+		world[1][2] = 3
+		displayWorld()
+	}, 10000)
+}
