@@ -39,13 +39,9 @@ let pacmanPosition = {
 	x: 0,
 	y: 4
 }
-function displayPacman(x, y) {
+function displayPacman() {
 	// named with let to make it clear it is being updated
 	let pacman = document.getElementById('pac-man')
-
-	// update current position in position object
-	pacmanPosition.x = x
-	pacmanPosition.y = y
 
 	// update the styling
 	pacman.style.top = `${pacmanPosition.y * 26 + 3}px`
@@ -54,7 +50,7 @@ function displayPacman(x, y) {
 	checkForCoin()
 }
 // set pacman starting position
-displayPacman(pacmanPosition.x, pacmanPosition.y)
+displayPacman()
 
 let ghostPosition = {
 	x: 5,
@@ -177,6 +173,7 @@ document.onkeydown = function (event) {
 		pacmanX + 1 <= world[0].length
 	) {
 		pacmanX++
+		pacmanPosition.x = pacmanX
 		// turn pacman
 		pacman.style.transform = 'rotate(0deg)'
 
@@ -193,21 +190,24 @@ document.onkeydown = function (event) {
 	) {
 		// subtract one to check for collision move left one, displayPacman()
 		pacmanX--
+		pacmanPosition.x = pacmanX
 		pacman.style.transform = 'rotate(180deg)'
 	} else if (key == 'ArrowUp' && !checkForCollision(pacmanY - 1, pacmanX)) {
 		// subtract because it is distance from the top, move up
 		pacmanY--
+		pacmanPosition.y = pacmanY
 		pacman.style.transform = 'rotate(270deg)'
 	} else if (key == 'ArrowDown' && !checkForCollision(pacmanY + 1, pacmanX)) {
 		// add because it is distance from the top, move down
 		pacmanY++
+		pacmanPosition.y = pacmanY
 		pacman.style.transform = 'rotate(90deg)'
 	}
 
 	if (ghostExists) {
 		checkForCollisionWithGhost()
 	}
-	displayPacman(pacmanX, pacmanY) // update display
+	displayPacman() // update display
 }
 
 function endGame(message) {
@@ -222,9 +222,19 @@ function endGame(message) {
 	ghost.style.backgroundImage = 'none'
 	ghostExists = false
 	cherriesExist = false
-	world[1][2] = 0
+	world = [
+		[2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+		[2, 1, 0, 2, 1, 2, 0, 1, 0, 0],
+		[2, 2, 0, 2, 0, 0, 0, 2, 2, 2],
+		[2, 2, 0, 0, 2, 2, 0, 2, 1, 2],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+		[2, 0, 0, 0, 2, 0, 0, 0, 2, 2],
+		[2, 2, 2, 2, 0, 1, 2, 0, 0, 2],
+		[2, 1, 0, 0, 0, 0, 2, 0, 1, 2],
+		[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+	]
 
-	displayPacman(pacmanPosition.x, pacmanPosition.y)
+	displayPacman()
 	displayWorld()
 	clearTimeout(ghostTimeout)
 	clearInterval(ghostInterval)
