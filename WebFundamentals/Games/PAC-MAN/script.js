@@ -58,10 +58,17 @@ let ghostPosition = {
 	x: 5,
 	y: 4
 }
+let ghostExists = false
+
 function displayGhost() {
 	let ghost1 = document.getElementById('ghost1')
 
-	ghost1.style.backgroundImage = 'url(Assets/ghost1.png)'
+	// If the game has ended, reset the ghost's background image
+	if (!ghostExists) {
+		ghost1.style.backgroundImage = 'none'
+	} else {
+		ghost1.style.backgroundImage = 'url(Assets/ghost1.png)'
+	}
 
 	ghost1.style.top = `${ghostPosition.y * 26 + 3}px`
 	ghost1.style.left = `${ghostPosition.x * 26 + 3}px`
@@ -98,13 +105,17 @@ function moveGhost() {
 
 	ghostPosition.y = ghostY
 	ghostPosition.x = ghostX
+	checkForCollisionWithGhost()
 	displayGhost()
 }
 
-setTimeout(() => {
+let ghostInterval = null
+// Delay the initial displayGhost and then start the interval
+let ghostTimeout = setTimeout(() => {
+	ghostExists = true
 	displayGhost()
-	setInterval(moveGhost, 500)
-}, 1000)
+	ghostInterval = setInterval(moveGhost, 200)
+}, 5000)
 
 let score = 0
 function checkForCoin() {
@@ -112,10 +123,10 @@ function checkForCoin() {
 	const pacmanY = pacmanPosition.y
 
 	if (world[pacmanY][pacmanX] == 1) {
-		let scoreDisplay = document.getElementById('coin-count')
+		let scoreDisplay = document.getElementById('score')
 		score += 10
 
-		scoreDisplay.innerText = `Coin Count: ${score}` // update count on screen
+		scoreDisplay.innerText = `Score: ${score}` // update count on screen
 
 		world[pacmanY][pacmanX] = 0 // remove coin
 
@@ -130,9 +141,19 @@ function checkForCollision(y, x) {
 	return false
 }
 
+function checkForCollisionWithGhost() {
+	if (
+		pacmanPosition.x == ghostPosition.x &&
+		pacmanPosition.y == ghostPosition.y
+	) {
+		endGame('Pacman and the ghost collided. Game over!')
+	}
+}
+
 // control pacman movement
 document.onkeydown = function (event) {
 	const key = event.key
+	const pacman = document.getElementById('pac-man')
 
 	// get the integer value of the current position
 	let pacmanX = pacmanPosition.x
@@ -144,10 +165,14 @@ document.onkeydown = function (event) {
 		pacmanX + 1 <= world[0].length
 	) {
 		pacmanX++
+		// turn pacman
+		pacman.style.transform = 'rotate(0deg)'
 
 		// check if leaving maze
 		if (pacmanX > world[0].length - 1) {
-			console.log('map complete')
+			endGame(
+				`Pacman reached the other side. Game over!\nYour score: ${score}`
+			)
 		}
 	} else if (
 		key == 'ArrowLeft' &&
@@ -156,18 +181,47 @@ document.onkeydown = function (event) {
 	) {
 		// subtract one to check for collision move left one, displayPacman()
 		pacmanX--
+		pacman.style.transform = 'rotate(180deg)'
 	} else if (key == 'ArrowUp' && checkForCollision(pacmanY - 1, pacmanX)) {
 		// subtract because it is distance from the top, move up
 		pacmanY--
+		pacman.style.transform = 'rotate(270deg)'
 	} else if (key == 'ArrowDown' && checkForCollision(pacmanY + 1, pacmanX)) {
 		// add because it is distance from the top, move down
 		pacmanY++
+		pacman.style.transform = 'rotate(90deg)'
 	}
 
+	if (ghostExists) {
+		checkForCollisionWithGhost()
+	}
 	displayPacman(pacmanX, pacmanY) // update display
 }
 
-// refactor to have a function that checks collision so it works for the ghost as well
-// add displayGhost() with timer that moves it
-// make pacman turn direction of travel
+function endGame(message) {
+	let ghost = document.getElementById('ghost1')
+	alert(message)
+	// Reset the game by resetting the positions, score, and any other necessary variables
+	pacmanPosition.x = 0
+	pacmanPosition.y = 4
+	ghostPosition.x = 5
+	ghostPosition.y = 4
+	score = 0
+	ghost.style.backgroundImage = 'none'
+	ghostExists = false
+
+	displayPacman(pacmanPosition.x, pacmanPosition.y)
+	displayWorld()
+	clearTimeout(ghostTimeout)
+	clearInterval(ghostInterval) // Clear the interval
+	displayGhost
+	ghostTimeout = setTimeout(() => {
+		ghostExists = true
+		displayGhost()
+		// Save the reference to your new interval in the ghostInterval variable
+		ghostInterval = setInterval(moveGhost, 200)
+	}, 5000)
+}
+
+// end game if get hit by ghost
 // add cherry, worth 50 points, change coins to be worth 10, change coin count to score

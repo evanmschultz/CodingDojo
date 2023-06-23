@@ -46,12 +46,18 @@ p {
 	background: url(Assets/coin.gif) no-repeat center;
 	background-size: 15px;
 }
+.cherries {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 15px;
+}
 #pac-man {
 	background: url(Assets/pac-man.gif) no-repeat center;
 	background-size: cover;
 	width: 20px;
 	height: 20px;
 	position: absolute;
+	transition: 150ms;
 }
 .ghost {
 	background-repeat: no-repeat;
@@ -60,4 +66,5 @@ p {
 	width: 20px;
 	height: 20px;
 	position: absolute;
+	transition: 150ms;
 }
