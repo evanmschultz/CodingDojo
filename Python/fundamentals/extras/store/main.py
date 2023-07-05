@@ -24,9 +24,14 @@ store.add_products([{
 # update product and print its info
 store.products[1].update_price(0.2, False).print_info()
 store.products[0].print_info()
-store.inflation(0.05)  # increase store's prices
-store.set_clearance('test_category_2', 0.2)  # set clearance on category
-store.sell_product(1)  # mark the product with the id of 1 as sold
+# increase store's prices
+store.inflation(0.05)
+# set clearance on category
+store.set_clearance('test_category_2', 0.2)
+# mark the product with the id of 1 as sold
+store.sell_product(1)
+# try and fail to sell product with id of 0 because it is not in the inventory
+store.sell_product(0)
 
 print('\nShow remaining inventory:')
 store.show_inventory()

@@ -16,13 +16,28 @@ class Store:
 
         return self  # return self so multiple methods can be strung together
 
-    def sell_product(self, id):  # use the list index for the id argument
-        sold_product = self.products.pop(id)
-        print(f'{sold_product.name} was sold')
+    # if the product id exists in the products list, remove it and print the product
+    def sell_product(self, id):
+        sold_product = None
+
+        # loop through product list, check if the product id matches the argument id
+        for product in self.products:
+            if product.id == id:
+                sold_product = product  # update sold product variable
+                # remove the product from the products list
+                self.products.remove(product)
+                break  # exit for loop
+
+        if sold_product:
+            print(
+                f'{sold_product.name} was sold for ${sold_product.price} from the {sold_product.category} category!')
+        else:
+            print(f'There is no product with an ID of {id} in the inventory!')
 
         return self  # return self so multiple methods can be strung together
 
     # increases the price of all the products in the store's product list
+
     def inflation(self, percentage_increase):
         for product in self.products:
             old_price = product.price

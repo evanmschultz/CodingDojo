@@ -1,8 +1,14 @@
 class Product:
+    next_id = 1  # storing id to create a unique id
+
     def __init__(self, name, price, category):
         self.name = name
         self.price = price
         self.category = category
+
+        # set unique product id and increment class next_id variable
+        self.id = Product.next_id
+        Product.next_id += 1
 
     # print out all the product's attributes
     def print_info(self):
