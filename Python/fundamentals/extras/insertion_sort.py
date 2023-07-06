@@ -43,20 +43,17 @@ class SortClass:
 
         # loop over array, outer
         for i in range(1, len(self.list)):
-            # set variable with self.list[index] as the value for swapping
-            value = self.list[i]
+            # set variable index to loop down to start of list
             index = i
 
             # loop until you get to the first item of the list, index is > 0 because we are comparing to (index - 1)
-            while index > 0 and value < self.list[index - 1]:
-                # swap move value before index up 1 position
-                self.list[index] = self.list[index - 1]
+            while index > 0 and self.list[index] < self.list[index - 1]:
+                # swap values so the smaller number goes down and larger goes up
+                self.list[index], self.list[index -
+                                            1] = self.list[index - 1], self.list[index]
                 # decrement index, increment counter
                 index -= 1
                 counter += 1
-
-            # set value at index to the value stored above
-            self.list[index] = value
 
         print(f'{self.list}\n\nAlgorithm took {counter} loops')
 
