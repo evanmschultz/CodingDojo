@@ -101,6 +101,9 @@ if __name__ == '__main__':
     zoo.add_animal(fred).add_animal(
         george).add_animal(stripe).add_animal(yogurt)
     # print animals, feed, display again
+    print(f'{50 * "/ "}\n')
     zoo.display_all_animals().feed_animals().display_all_animals
     # have animals do their unique method
+    print(f'\n{50 * "/ "}\n')
     fred.bray(), george.roar(), stripe.mark_territory(), yogurt.scratch_back()
+    print(f'\n{50 * "/ "}\n')
