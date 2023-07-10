@@ -60,3 +60,14 @@ WHERE name = 'Dog Schultz';
 
 -- Display all names in database
 SELECT * FROM names;
+
+-- Normalize table
+ALTER TABLE `names`.`names` 
+ADD COLUMN `last_name` VARCHAR(45) NULL AFTER `first_name`,
+CHANGE COLUMN `name` `first_name` VARCHAR(45) NULL DEFAULT NULL ;
+
+-- Update names to first and last
+UPDATE names SET first_name = 'Evan', last_name = 'Schultz' WHERE (first_name = 'Evan Schultz');
+UPDATE names SET first_name = 'Krista', last_name = 'Schultz' WHERE (first_name = 'Krista Schultz');
+UPDATE names SET first_name = 'Sjöfn', last_name = 'Schultz' WHERE (first_name = 'Sjöfn Schultz');
+UPDATE names SET first_name = 'Kvasir', last_name = 'Schultz' WHERE (first_name = 'Kvasir Schultz');
