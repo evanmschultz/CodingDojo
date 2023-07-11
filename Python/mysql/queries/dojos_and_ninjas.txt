@@ -1,0 +1,81 @@
+-- view dojos table
+select * from dojos;
+
+-- create 3 new dojos
+insert into dojos (name, created_at, updated_at)
+values ('SF', now(), now()),
+		('LA', now(), now()),
+        ('Bellevue', now(), now());
+
+-- view dojos table
+select * from dojos;
+
+-- set safeguards to 0
+SET SQL_SAFE_UPDATES = 0;
+
+-- delete the three tables created
+delete from dojos;
+
+-- view dojos table
+select * from dojos;
+
+-- create 3 new dojos
+insert into dojos (name, created_at, updated_at)
+values ('SF', now(), now()),
+		('LA', now(), now()),
+        ('Bellevue', now(), now());
+
+-- view dojos table, to get id
+select * from dojos;
+
+-- create 3 new students for the first dojo
+insert into ninjas (first_name, last_name, age, created_at, updated_at, dojo_id)
+values ('Philip', 'Fry', 30, now(), now(), 4),
+		('Hubert','Farnsworth', 160, now(), now(), 4),
+        ('Turanga', 'Leela', 30, now(), now(), 4);
+        
+-- view students table
+select * from ninjas;
+
+-- create 3 new students for the first dojo
+insert into ninjas (first_name, last_name, age, created_at, updated_at, dojo_id)
+values ('Amy', 'Wong', 26, now(), now(), 5),
+		('John','Zoidberg', 48, now(), now(), 5),
+        ('Hermes', 'Conrad', 45, now(), now(), 5);
+        
+-- view students table
+select * from ninjas;
+
+-- create 3 new students for the first dojo
+insert into ninjas (first_name, last_name, age, created_at, updated_at, dojo_id)
+values ('Bender', 'Rodriguez', 4, now(), now(), 6),
+		('Scruffy','The Janitor', 53, now(), now(), 6),
+        ('Joey', 'Mousepad', 10, now(), now(), 6);
+        
+-- view students table
+select * from ninjas;
+
+-- view students table from the first dojo
+select * from ninjas where dojo_id = 4;
+
+-- view students table from the second dojo
+select * from ninjas where dojo_id = 5;
+
+-- view the dojo of the last student in the ninjas table
+select * from dojos
+where id = (
+select dojo_id from ninjas
+order by id desc
+limit 1
+);
+
+-- join the ninja.id = 6 with their dojo
+select *
+from ninjas
+join dojos on ninjas.dojo_id = dojos.id
+where ninjas.id = 6;
+
+-- Use a JOIN to retrieve all the ninjas as well as that ninja's dojo
+SELECT * FROM ninjas 
+JOIN dojos ON dojos.id = ninjas.dojo_id;
+
