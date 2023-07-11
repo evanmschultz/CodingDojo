@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Playground</title>
+		<style>
+			/* ///////////// zero css ///////////// */
+			* {
+				margin: 0 auto;
+				border: 0;
+				padding: 0;
+				outline: 0;
+				font-family: 'roboto', sans-serif;
+				color: #eee;
+			}
+			/* ///////////// body styling ///////////// */
+			body {
+				height: 60vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #050505;
+			}
+			/* ///////////// div styling ///////////// */
+			.box {
+				/* border: solid 0px #ccc; */
+				border-radius: 1rem;
+				padding: 1rem;
+				height: fit-content;
+				width: fit-content;
+				background-color: #171717;
+				overflow: auto;
+			}
+			h1 {
+				font-size: 2.5rem;
+				padding-bottom: 0.5rem;
+				margin-bottom: 1rem;
+				border-bottom: 1px solid #050505;
+			}
+			p {
+				margin-bottom: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h1>Playground</h1>
+			<p>To play around go to the url and add '/play/</p>
+			<p>To repeat the boxes a set number of times add '/play/num'</p>
+			<p>To change the color add '/play/num/color'</p>
+			<p>Have fun!!!</p>
+		</div>
+	</body>
+</html>
