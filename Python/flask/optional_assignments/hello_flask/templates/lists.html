@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lists</title>
+
+		<style>
+			table {
+				border-spacing: 0;
+				border-collapse: collapse;
+			}
+			th {
+				text-align: left;
+			}
+			thead *,
+			tbody * {
+				border: 1px solid black;
+				padding: 0 8px 0 4px;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Display Lists</h1>
+
+		<h2>Random Numbers</h2>
+		<ul>
+			{% for num in random_numbers %}
+			<li>{{ num }}</li>
+			{% endfor %}
+		</ul>
+
+		<h2>Students from Dictionary</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for student in students %}
+				<tr>
+					<td>{{ student['name'] }}</td>
+					<td>{{ student['age'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
