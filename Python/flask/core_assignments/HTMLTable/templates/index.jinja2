@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>HTML Table</title>
+		<meta
+			name="description"
+			content="A page demonstrating competence with rendering lists in Jinja and using a CSS framework"
+		/>
+		<meta name="author" content="Evan Schultz" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="stylesheet" href="../static/css/normalize.css" />
+		<link rel="stylesheet" href="../static/css/skeleton.css" />
+
+		<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="../static/assets/favicon.png" />
+	</head>
+	<body>
+		<!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<div class="container">
+			<!-- Table Head
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			<table class="u-full-width">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Full Name</th>
+					</tr>
+				</thead>
+				<!-- Table Body
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+				<tbody>
+					{% for user in users %}
+					<tr>
+						<td>{{ user['first_name'] }}</td>
+						<td>{{ user['last_name'] }}</td>
+						<td>
+							{{ user['first_name'] }} {{ user['last_name'] }}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<!-- End Table
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		</div>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>
