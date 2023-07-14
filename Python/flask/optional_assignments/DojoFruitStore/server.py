@@ -9,23 +9,16 @@ def index():
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
-    # Get quantities of each fruit from request.form
-    strawberry_count = int(request.form.get('strawberry', 0))
-    raspberry_count = int(request.form.get('raspberry', 0))
-    apple_count = int(request.form.get('apple', 0))
-
-    # Get customer's information from request.form
-    first_name = request.form.get('first_name', '')
-    last_name = request.form.get('last_name', '')
-    student_id = request.form.get('student_id', '')
+    form_data = {}
+    # Loop over request.form and add inform each key: value pair to form_data
+    for key, value in request.form.items():
+        form_data[key] = value
 
     print(
-        f'Charging {first_name} {last_name} for {strawberry_count + raspberry_count + apple_count} fruits')
+        f'Charging {form_data["first_name"]} {form_data["last_name"]} for {form_data["strawberry"] + form_data["raspberry"] + form_data["apple"]} fruits')
 
     # Pass these variables to render_template
-    return render_template("checkout.html", strawberry_count=strawberry_count,
-                           raspberry_count=raspberry_count, apple_count=apple_count,
-                           first_name=first_name, last_name=last_name, student_id=student_id)
+    return render_template("checkout.html", form_data=form_data)
 
 
 @app.route('/fruits')
