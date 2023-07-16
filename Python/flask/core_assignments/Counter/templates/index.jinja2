@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{# <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{# <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{# <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		{# <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<script src="static/js/script.js"></script>
+
+		{# <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link rel="stylesheet" href="static/css/normalize.css" />
+		<link rel="stylesheet" href="static/css/skeleton.css" />
+
+		{# <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" /> #}
+
+	</head>
+	<body>
+		{# <!-- Start Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<div class="container"> {# Sets width to a max of 960px #}
+			<h1 class="u-text-center">Counter</h1>
+			<h4 class="u-text-center">{{ visits }} 
+				{% if visits == 1 %}
+					time
+				{% else %}
+					times
+				{% endif %}
+			</h4>
+		{# <!-- Button Container
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+			<div class="container">
+
+				<div class="one-half column">
+					<form action="/increment" method="post">
+						<button class="button u-pull-right" onclick="buttonClicked(this)">Counter</button>
+					</form>
+				</div>
+
+				<div class="one-half column">
+					<form action="/reset" method="post">
+						<button class="button u-pull-left" onclick="buttonClicked(this)">Reset</button>
+					</form>
+				</div>
+				
+			</div>
+
+		</div>
+
+		{# <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+	</body>
+</html>
