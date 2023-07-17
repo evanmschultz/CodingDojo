@@ -41,24 +41,53 @@
 			<h1 class="u-text-center">Counter</h1>
 			<h4 class="u-text-center">{{ visits }} 
 				{% if visits == 1 %}
-					time
+					Visit
 				{% else %}
-					times
+					Visits
+				{% endif %}
+			</h4>
+			<h4 class="u-text-center">{{ real_visits }} 
+				{% if visits == 1 %}
+					Real Visit
+				{% else %}
+					Real Visits
 				{% endif %}
 			</h4>
 		{# <!-- Button Container
   –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
 			<div class="container">
-
+				{# <!-- Counter button (increment by 1)
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
 				<div class="one-half column">
-					<form action="/increment" method="post">
+					<form action="/increment?amount=1" method="post">
 						<button class="button u-pull-right" onclick="buttonClicked(this)">Counter</button>
 					</form>
 				</div>
 
+				{# <!-- Count by 2 button (increment by 2)
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
 				<div class="one-half column">
+					<form action="/increment?amount=2" method="post">
+						<button class="button u-pull-left" onclick="buttonClicked(this)">Count by 2</button>
+					</form>
+				</div>
+				{# <!-- Reset button (clear visits in session dictionary)
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+				<div class="u-text-center">
 					<form action="/reset" method="post">
-						<button class="button u-pull-left" onclick="buttonClicked(this)">Reset</button>
+						<button class="button margin-top" onclick="buttonClicked(this)">Reset</button>
+					</form>
+				</div>
+
+				{# <!-- Increment by form (increment by amount user inputs)
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+				<div class="u-text-center">
+					<form action="/increment_by" method="post">
+						<input name="increment_by" type="number" min="1" required>
+
+						<button type="submit" class="button" onclick="buttonClicked(this)">
+							Increment
+  						</button>
 					</form>
 				</div>
 				

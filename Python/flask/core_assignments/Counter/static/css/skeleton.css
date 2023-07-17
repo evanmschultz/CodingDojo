@@ -366,8 +366,9 @@ textarea,
 select {
 	height: 38px;
 	padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-	background-color: #fff;
+	background-color: #161616;
 	border: 1px solid #d1d1d1;
+	color: #d1d1d1;
 	border-radius: 4px;
 	box-shadow: none;
 	box-sizing: border-box;
@@ -522,6 +523,9 @@ form {
 }
 .u-text-center {
 	text-align: center;
+}
+.margin-top {
+	margin-top: 3.3rem;
 }
 
 /* Misc
