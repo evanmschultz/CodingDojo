@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{# <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{# <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{# <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		{# <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<script src="static/js/script.js"></script>
+
+		{# <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link rel="stylesheet" href="static/css/normalize.css" />
+		<link rel="stylesheet" href="static/css/skeleton.css" />
+
+		{# <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" /> #}
+
+	</head>
+	<body>
+		{# <!-- Start Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+		<div class="container"> {# Sets width to a max of 960px #}
+
+			{# <!-- Header
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+			<h1 class="u-text-center">Guess the Number</h1>
+
+			<h4 class="u-text-center">
+				I am thinking of a number between 1 and 100. Try guessing it!!
+			</h4>
+
+			{# <!-- End Header
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+			{# <!-- Notification container
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+			{% if 'Low' in message %}
+				<div class="container notification-container" style="background-color: #18BCDC">
+					<p>{{ message }}</p>
+				</div>
+
+			{% elif 'High' in message %}
+				<div class="container notification-container" style="background-color: #1BB8FA">
+					<p>{{ message }}</p>
+				</div>
+
+			{% elif 'valid' in message %}
+				<div class="container notification-container" style="background-color: #CB1717">
+					<p>{{ message }}</p>
+				</div>
+
+			{% elif message == '' %}
+
+			{% elif 'Lost' in message %}
+				<div class="container notification-container" style="background-color: #fa5a1b">
+					<p>{{ message }}</p>
+				</div>
+
+			{% else %}
+				{# Display success #}
+				<div class="container notification-container" style="background-color: #25E9B9; overflow-wrap: normal;">
+					<p>{{ message }}</p>
+				</div>
+
+			{% endif %}
+
+			{# <!-- End Notification container
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+		{# <!-- Form Container
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+			<div class="container">
+
+				{# <!-- Form inputs, if player won or lost: display reset, else: display input
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+				{% if 'Lost' in message or 'Correct' in message%}
+
+					<div class="u-text-center">
+						<form action="/reset" method="post">
+							<button type="submit" class="button" onclick="buttonClicked(this)">
+								Reset
+							</button>
+						</form>
+					</div>
+
+				{% else %}
+
+					<div class="u-text-center">
+						<form action="/guess" method="post">
+							<input name="guessed_number" type="text" required>
+
+							<button type="submit" class="button" onclick="buttonClicked(this)">
+								Submit Guess
+							</button>
+						</form>
+					</div>
+
+				{% endif %}
+
+				{# <!-- End Form inputs
+  	–––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+				
+			</div>
+
+			{# <!-- End Form Container
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+		</div>
+
+		{# <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+	</body>
+</html>
