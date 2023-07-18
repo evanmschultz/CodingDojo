@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{# <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{# <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{# <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		{# <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<script src="static/js/script.js"></script>
+
+		{# <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link rel="stylesheet" href="static/css/normalize.css" />
+		<link rel="stylesheet" href="static/css/skeleton.css" />
+
+		{# <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" /> #}
+
+	</head>
+	<body>
+		{# <!-- Start Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<div class="container"> {# Sets width to a max of 960px #}
+			
+			{# <!-- Input form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+            <div class="result-div">
+			    <h1>{{ name }}</h1>
+            </div>
+            
+            <div class="result-div">
+                <h4>Dojo Location: {{ dojo_location }}</h4>
+            </div>
+
+            <div class="result-div">
+                <h4>Favorite Language: {{ favorite_language }}</h4>
+            </div>
+
+            <div class="result-div">
+                <h4>Comments:</h4>
+                <p>{{ comments }}</p>
+            </div>
+
+            <form action="/reset" method="post">
+                <button class="button margin-top" onclick="buttonClicked(this)">Reset</button>
+            </form>
+
+		</div>
+
+		{# <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+	</body>
+</html>

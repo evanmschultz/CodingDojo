@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{# <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{# <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{# <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		{# <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<script src="static/js/script.js"></script>
+
+		{# <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link rel="stylesheet" href="static/css/normalize.css" />
+		<link rel="stylesheet" href="static/css/skeleton.css" />
+
+		{# <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" /> #}
+
+	</head>
+	<body>
+		{# <!-- Start Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<div class="container"> {# Sets width to a max of 960px #}
+			
+			{# <!-- Input form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+			<h1>Dojo Survey</h1>
+			<form action="/submit" method="post">
+
+				<label for="name">Name</label>
+				<input type="text" name="name" placeholder="Name">
+
+				<label for="dojo_location">Dojo Location</label>
+				<select name="dojo_locations">
+					
+					<option value="" disabled selected>Select a Location</option>
+					<option value="chicago">Chicago</option>
+					<option value="denver">Denver</option>
+					<option value="bellevue">Bellevue</option>
+					<option value="san_antonio">San Antonio</option>
+					<option value="san_francisco">San Francisco</option>
+					<option value="porto">Porto</option>
+					<option value="online">Online</option>
+
+				</select>
+
+				<label for="favorite_language">Favorite Language</label>
+				<select name="favorite_language">
+
+					<option value="" disabled selected>Select a Language</option>
+					<option value="python">Python</option>
+					<option value="javascript">JavaScript</option>
+					<option value="java">Java</option>
+					<option value="c#">c#</option>
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="mojo">Mojo</option>
+				</select>
+
+				<label for="comments">Comments</label>
+				<textarea name="comments" id="comments" onclick="clearTemporaryValue(this)" placeholder="Enter your comments here..."></textarea>
+
+				<button type="submit" class="button" onclick="buttonClicked(this)">Submit</button>
+			</form>
+
+		</div>
+
+		{# <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+	</body>
+</html>
