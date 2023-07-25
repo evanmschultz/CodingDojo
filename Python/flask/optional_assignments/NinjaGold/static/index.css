@@ -1,0 +1,35 @@
+h1,
+p {
+	display: flex;
+	margin: 1rem;
+	align-items: center;
+	gap: 1rem;
+}
+th {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+span {
+	border: 1px solid #82aed4;
+	border-image: none 100% 1 0 stretch;
+	border-radius: 0.25rem;
+	box-shadow: 0 0 0 transparent;
+	box-sizing: border-box;
+	min-width: 65px;
+	font-size: 1.25rem;
+	display: inline-block;
+	text-align: center;
+}
+article {
+	margin-top: 0;
+	padding-bottom: 0;
+	min-width: 200px !important;
+}
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+input[type='submit'] {
+	max-width: 150px;
+}

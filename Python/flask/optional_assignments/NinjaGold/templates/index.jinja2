@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{# <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta charset="utf-8" />
+		<title>Counter</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{# <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{# <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+        
+
+		{# <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<script src="static/js/script.js"></script>
+
+		{# <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+        <link rel="stylesheet" href="../static/index.css">
+
+		{# <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" /> #}
+
+	</head>
+	<body>
+		{# <!-- Start Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+        {# <!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+        <header>
+            <h1>Ninja Gold</h1>
+            <div>
+                <p>
+                    Your Gold:
+                    <span>
+                        {{ session['gold'] }}
+                    </span>
+                </p>
+            </div>
+        </header>
+        {# <!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+
+        {# <!-- Start Main
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+        <main class="container-fluid">
+
+            {# <!-- Start Input Form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+            <div class="grid">
+                <article>
+                    <form action="/process_money" method="post" class="card">
+                        <h2>Farm</h2>
+                        <p>(earns 10-20 golds)</p>
+                        <input type="hidden" name="building" value="farm" />
+                        <input class="outline" type="submit" value="Find Gold!"/>
+                    </form>
+                </article>
+
+                <article>
+                    <form action="/process_money" method="post" class="card">
+                        <h2>Cave</h2>
+                        <p>(earns 5-10 golds)</p>
+                        <input type="hidden" name="building" value="cave" />
+                        <input class="outline" type="submit" value="Find Gold!"/>
+                    </form>
+                </article>
+
+                <article>
+                    <form action="/process_money" method="post" class="card">
+                        <h2>House</h2>
+                        <p>(earns 2-5 golds)</p>
+                        <input type="hidden" name="building" value="house" />
+                        <input class="outline" type="submit" value="Find Gold!"/>
+                    </form>
+                </article>
+
+                <article>
+                    <form action="/process_money" method="post" class="card">
+                        <h2>Casino</h2>
+                        <p>(earns/takes 0-50 golds)</p>
+                        <input type="hidden" name="building" value="casino" />
+                        <input class="outline" type="submit" value="Find Gold!"/>
+                    </form>
+                </article>
+            </div>
+            {# <!-- End Input Form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+
+            {# <!-- Start Activity Table
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th>Activities</th>
+                        <th>
+                            <form action="/reset" method="post">
+                                <input class="outline" type="submit" value="Reset"/>
+                            </form>
+                        </th>
+                    </tr>
+                </thead>
+
+                {# ______________Table body____________________
+
+                    Iterate through the list backwards to display the most recent activity first.
+                            _____________________________________________ #}
+                <tbody>
+                    {% for activity in session['activities']|reverse %}
+                        <tr>
+                            {% if 'lost' in activity %}
+                                <td style="color: #f4511e">
+                            {% elif 'Earned' in activity %}
+                                <td style="color: #7cb342;">
+                            {% else %}
+                                <td>
+                            {% endif %}
+
+                            {{ activity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </main>
+        {# <!-- End Main
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+
+		{# <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– --> #}
+	</body>
+</html>
