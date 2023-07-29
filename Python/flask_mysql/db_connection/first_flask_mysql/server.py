@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, redirect, render_template, request
 # import the class from friend.py
 from friend import Friend
