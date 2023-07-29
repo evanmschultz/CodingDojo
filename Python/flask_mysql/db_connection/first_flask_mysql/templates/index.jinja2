@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{#
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<meta charset="utf-8" />
+		<title>Flask Friends</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{#
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		{#
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		{#
+		<!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<script src="static/js/script.js"></script>
+
+		{#
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+		/>
+		<link rel="stylesheet" href="../static/index.css" />
+
+		{#
+		<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link rel="icon" type="image/png" href="images/favicon.png" />
+		#}
+	</head>
+	<body>
+
+		{#
+		<!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+		<header class="container-fluid">
+			<h1>All My Friends</h1>
+		</header>
+
+		{#
+		<!-- End Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#} 
+		<main class="container-fluid">
+
+			{#
+			<!-- Start Display Friends
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			#}
+			<div class="grid">
+				{% for friend in all_friends %}
+					
+					<article>
+						<h2>{{ friend.first_name }} {{ friend.last_name }}</h2>
+						<p>{{ friend.occupation }}</p>
+						<form action="/friends/update>" method="POST">
+							<button type="submit">Edit Friend</button>
+						</form>
+					</article>
+					
+				{% endfor %}
+			</div>
+
+			{#
+			<!-- Start Input Form
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			#}
+			<h2>Add a Friend</h2>
+
+			<form action="/create_friend" method="POST">
+				<label for="first_name">First Name:</label>
+				<input type="text" name="first_name" />
+				<label for="last_name">Last Name:</label>
+				<input type="text" name="last_name" />
+				<label for="occupation" >Occupation:</label>
+				<input type="text" name="occupation" />
+				<input type="submit" value="Add Friend" />
+			</form> 
+
+			{#
+			<!-- End Input Form
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			#}
+		</main>
+
+		{#
+		<!-- End Main
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		#}
+	</body>
+</html>
