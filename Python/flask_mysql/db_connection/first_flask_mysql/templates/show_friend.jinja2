@@ -55,7 +55,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 		#}
 		<header class="container-fluid">
-			<h1>All My Friends</h1>
+			<h1>{{ friend.first_name }} {{ friend.last_name }}</h1>
 		</header>
 
 		{#
@@ -69,44 +69,15 @@
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 			#}
 			<div class="grid">
-				{% for friend in all_friends %}
-					
 					<article>
-						<h2>
-							{{ friend.first_name }}
-                            <br> 
-                            {{ friend.last_name }}
-                        </h2>
+						<h2>{{ friend.first_name }} {{ friend.last_name }}</h2>
 
 						<p>{{ friend.occupation }}</p>
-						<form action="/show_friend/{{ friend.id }}" method="GET">
-							<button type="submit">Show Friend</button>
+						<form action="/friends/update/{{ friend.id }}" method="POST">
+							<button type="submit">Edit Friend</button>
 						</form>
 					</article>
-					
-				{% endfor %}
 			</div>
-
-			{#
-			<!-- Start Input Form
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
-			<h2>Add a Friend</h2>
-
-			<form action="/create_friend" method="POST">
-				<label for="first_name">First Name:</label>
-				<input type="text" name="first_name" />
-				<label for="last_name">Last Name:</label>
-				<input type="text" name="last_name" />
-				<label for="occupation" >Occupation:</label>
-				<input type="text" name="occupation" />
-				<input type="submit" value="Add Friend" />
-			</form> 
-
-			{#
-			<!-- End Input Form
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
 		</main>
 
 		{#
