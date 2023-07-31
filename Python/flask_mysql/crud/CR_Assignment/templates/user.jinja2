@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {#
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <meta charset="utf-8" />
+  <title>Flask users</title>
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  {#
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {#
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+
+  {#
+  <!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <script src="static/js/script.js"></script>
+
+  {#
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <link rel="stylesheet" href="../static/style.css" />
+
+  {#
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  #}
+</head>
+
+<body>
+
+  {#
+  <!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <header class="container-fluid">
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <a href="/">Home</a>
+  </header>
+
+  {#
+  <!-- End Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+  <main class="container-fluid">
+
+    {#
+    <!-- Start Display users
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    #}
+    <div>
+      <div class="container">
+        <div class="container">
+
+          {# <p><b>Full Name: </b>{{ user.first_name }} {{ user.last_name }}</p>
+          <p><b>Email: </b>{{ user.email }}</p>
+          <p><b>Created At: </b>{{ user.created_at }}</p>
+          <p><b>Update At: </b>{{ user.updated_at }}</p>
+
+          <a href="/">Show User</a>
+          |
+          <a href="/">Edit User</a>
+          |
+          <a href="/">Delete User</a> #}
+
+          <article>
+            {% if not editing %}
+
+            <div>
+
+              <p>
+                <b>Full Name: </b>
+                {{ user.first_name }} {{ user.last_name }}
+              </p>
+              <p>
+                <b>Email: </b>
+                {{ user.email }}
+              </p>
+              <p>
+                <b>Created At: </b>
+                {{ user.created_at }}
+              </p>
+              <p>
+                <b>Updated At: </b>
+                {{ user.updated_at }}
+              </p>
+
+              <button type="button" onclick="location.href='/edit_user/{{ user.id }}'">Edit User</button>
+
+            </div>
+
+            {% else %}
+
+            <div>
+
+              <form action="/update_user" method="POST">
+
+                <input type="hidden" name="id" value="{{ user.id }}" />
+                <input type="text" name="first_name" value="{{ user.first_name }}" /><br />
+                <input type="text" name="last_name" value="{{ user.last_name }}" /><br />
+                <input type="text" name="email" value="{{ user.email }}" /><br />
+
+                <button type="submit">Save</button>
+                <button type="button" onclick="location.href='/user/{{ user.id }}'">Cancel</button>
+
+              </form>
+
+              <form action="/delete_user/{{ user.id }}" method="POST">
+                <button type="submit">Delete User</button>
+              </form>
+
+            </div>
+
+            {% endif %}
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  {#
+  <!-- End Main
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  #}
+</body>
+
+</html>

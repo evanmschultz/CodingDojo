@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		{#
-		<!-- Basic Page Needs
+
+<head>
+	{#
+	<!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<meta charset="utf-8" />
-		<title>Flask users</title>
-		<meta name="description" content="" />
-		<meta name="author" content="" />
+	#}
+	<meta charset="utf-8" />
+	<title>Flask users</title>
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	{#
+	<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	{#
+	<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+
+	{#
+	<!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<script src="static/js/script.js"></script>
+
+	{#
+	<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+	<link rel="stylesheet" href="../static/style.css" />
+
+	{#
+	<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	#}
+</head>
+
+<body>
+
+	{#
+	<!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<header class="container-fluid">
+		<h1>All Users</h1>
+		<a href="/">Home</a>
+	</header>
+
+	{#
+	<!-- End Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<main class="container-fluid">
 
 		{#
-		<!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		{#
-		<!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
-			rel="stylesheet"
-			type="text/css"
-		/>
-
-		{#
-		<!-- Script
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<script src="static/js/script.js"></script>
-
-		{#
-		<!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-		/>
-		<link rel="stylesheet" href="../static/index.css" />
-
-		{#
-		<!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		<link rel="icon" type="image/png" href="images/favicon.png" />
-		#}
-	</head>
-	<body>
-
-		{#
-		<!-- Start Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<header class="container-fluid">
-			<h1>All Users</h1>
-		</header>
-
-		{#
-		<!-- End Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#} 
-		<main class="container-fluid">
-
-			{#
-			<!-- Start Display users
+		<!-- Start Display users
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
-			<div>
-				<div class="container">
-					<table>
-						<thead>
+		#}
+		<div>
+			<div class="container">
+				<table>
+					<thead>
 
-							<th>
-								First Name
-							</th>
-							<th>
-								Last Name
-							</th>
-							<th>
-								Email
-							</th>
-							<th>
-								Created At
-							</th>
+						<th>
+							First Name
+						</th>
+						<th>
+							Last Name
+						</th>
+						<th>
+							Email
+						</th>
+						<th>
+							Created At
+						</th>
+						<th>
+							Actions
+						</th>
 
-						</thead>
+					</thead>
 
-						{% for user in users %}
+					{% for user in users %}
 
-						<tr>
-							<td>{{ user.first_name }}</td>
-							<td>{{ user.last_name }}</td>
-							<td>{{ user.email }}</td>
-							<td>{{ user.created_at }}</td>
-						</tr>
+					<tr>
+						<td>{{ user.first_name }}</td>
+						<td>{{ user.last_name }}</td>
+						<td>{{ user.email }}</td>
+						<td>{{ user.created_at }}</td>
+						<td class="flex">
+							<form action="/user/{{ user.id }}" method="GET">
+								<button type="submit">Show User</button>
+							</form>
+							<form action="/edit_user/{{ user.id }}" method="GET">
+								<button type="submit">Edit User</button>
+							</form>
+							<form action="/delete_user/{{ user.id }}" method="POST">
+								<button type="submit">Delete User</button>
+							</form>
+						</td>
+					</tr>
 
-						{% endfor %}
-					</table>
-				</div>
-
-				<div class="container">
-					<form action="/add_user" method="GET">
-						<button type="submit">Add User</button>
-					</form>
-				</div>
-
+					{% endfor %}
+				</table>
 			</div>
 
-		</main>
+			<div class="container">
+				<form action="/add_user" method="GET">
+					<button type="submit">Add User</button>
+				</form>
+			</div>
 
-		{#
-		<!-- End Main
+		</div>
+
+	</main>
+
+	{#
+	<!-- End Main
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-	</body>
+	#}
+</body>
+
 </html>

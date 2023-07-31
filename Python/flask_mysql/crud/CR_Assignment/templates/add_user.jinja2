@@ -1,99 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		{#
-		<!-- Basic Page Needs
+
+<head>
+	{#
+	<!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<meta charset="utf-8" />
-		<title>Add User</title>
-		<meta name="description" content="" />
-		<meta name="author" content="" />
+	#}
+	<meta charset="utf-8" />
+	<title>Add User</title>
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	{#
+	<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	{#
+	<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+
+	{#
+	<!-- Script
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<script src="static/js/script.js"></script>
+
+	{#
+	<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+	<link rel="stylesheet" href="../static/index.css" />
+
+	{#
+	<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	#}
+</head>
+
+<body>
+
+	{#
+	<!-- Start Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<header class="container-fluid">
+		<h1>Add User</h1>
+		<a href="/">Home</a>
+	</header>
+
+	{#
+	<!-- End Document Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+	<main class="container-fluid">
 
 		{#
-		<!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		{#
-		<!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
-			rel="stylesheet"
-			type="text/css"
-		/>
-
-		{#
-		<!-- Script
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<script src="static/js/script.js"></script>
-
-		{#
-		<!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-		/>
-		<link rel="stylesheet" href="../static/index.css" />
-
-		{#
-		<!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		<link rel="icon" type="image/png" href="images/favicon.png" />
-		#}
-	</head>
-	<body>
-
-		{#
-		<!-- Start Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<header class="container-fluid">
-			<h1>Add User</h1>
-		</header>
-
-		{#
-		<!-- End Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#} 
-		<main class="container-fluid">
-
-			{#
-			<!-- Start Input Form
+		<!-- Start Input Form
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
-			<h2>Add a User</h2>
+		#}
+		<h2>Add a User</h2>
 
-			<form action="/create_user" method="POST">
+		<form action="/create_user" method="POST">
 
-				<label for="first_name">First Name:</label>
-				<input type="text" name="first_name" />
+			<label for="first_name">First Name:</label>
+			<input type="text" name="first_name" />
 
-				<label for="last_name">Last Name:</label>
-				<input type="text" name="last_name" />
+			<label for="last_name">Last Name:</label>
+			<input type="text" name="last_name" />
 
-				<label for="email">Email:</label>
-				<input type="text" name="email" />
+			<label for="email">Email:</label>
+			<input type="text" name="email" />
 
-				<input type="submit" value="Add User" />
-				
-			</form> 
+			<input type="submit" value="Add User" />
 
-			{#
-			<!-- End Input Form
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
-		</main>
+		</form>
 
 		{#
-		<!-- End Main
+		<!-- End Input Form
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 		#}
-	</body>
+	</main>
+
+	{#
+	<!-- End Main
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	#}
+</body>
+
 </html>

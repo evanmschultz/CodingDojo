@@ -1,8 +1,7 @@
 # A cursor is the object we use to interact with the database and has built in methods
-from pymysql import Connection
 import pymysql.cursors
 # Type hinting imports
-from typing import Any, Dict, Literal, Optional, Tuple
+from typing import Any, Literal, Tuple
 
 
 class MySQLConnection:
@@ -31,7 +30,28 @@ class MySQLConnection:
         # Establish the connection to the database
         self.connection = connection
 
-    def query_db(self, query: str, data: Optional[Dict[str, Any]] = None) -> int | Tuple[Dict[str, Any], ...] | Literal[False] | None:
+    def query_db(self, query: str, data: dict[str, Any] = None) -> int | Tuple[dict[str, Any], ...] | Literal[False] | None:
+        """
+        Executes a SQL query on the database. Depending on the type of query, different results are returned.
+
+        This method commits the query and closes the connection after execution, regardless of success or failure.
+
+        Args:
+            query (str): The SQL query to be executed.
+            data (dict[str, Any], optional): The data to be used in the query, if any. Defaults to None.
+
+        Returns:
+            int: If an INSERT query was executed, the method returns the row ID of the inserted row.
+            Tuple[dict[str, Any], ...]: If a SELECT query was executed, the method returns the fetched data as a tuple of dictionaries.
+            Literal[False]: If the query execution fails, the method returns False.
+            None: If an UPDATE or DELETE query was executed, the method returns None as these queries don't have a return value.
+
+        Raises:
+            Exception: Any exceptions raised during the execution of the query are caught and printed, but not re-raised.
+
+        Note:
+            This method assumes a connection is already established, and will close the connection after execution.
+        """
         with self.connection.cursor() as cursor:
             try:
                 query = cursor.mogrify(query=query, args=data)
@@ -53,7 +73,7 @@ class MySQLConnection:
                     # SELECT queries will return the data from the database as a TUPLE OF DICTIONARIES using pymysql
                     self.connection.commit()
 
-                    result: Tuple[Dict[str, Any]] = cursor.fetchall()
+                    result: Tuple[dict[str, Any]] = cursor.fetchall()
                     return result
 
                 else:
@@ -73,7 +93,7 @@ class MySQLConnection:
 
 def connectToMySQL(db) -> MySQLConnection:
     """
-    Instantiates an instance of the MySQLConnection class to create a connection to the database argument
+    Instantiates an instance of the MySQLConnection class to create a connection to the database argument.
 
     Args:
         db: A string of the name of the database to create a connection with

@@ -6,9 +6,10 @@ from typing import Any, Dict, Literal, NoReturn, Self, Tuple, Union
 
 
 class User:
-    db = 'users'
+    database: str = 'users'
 
-    def __init__(self, data) -> None:
+    def __init__(self, data) -> NoReturn:
+        self.id: int = data['id']
         self.first_name: str = data['first_name']
         self.last_name: str = data['last_name']
         self.email: str = data['email']
@@ -24,53 +25,60 @@ class User:
         as instances of the User class.
 
         Args:
-            cls: The User class.
+            cls (class): The User class.
 
         Returns:
             list[Self]: A list of User instances populated with data from 
             the database.
+
+        Notes:
+            This is a class method for the User class.
         """
 
         # Set query
-        query: str = 'SELECT * FROM users'
+        query: str = 'SELECT * FROM users;'
 
         # Get users list from database
         results: int | tuple[dict[str, Any], ...] | Literal[False] | None = connectToMySQL(
-            db=cls.db).query_db(query=query)
+            db=cls.database).query_db(query=query)
 
         print(results)
-        users = [cls(user) for user in results]
+        users: list[Self] = [cls(user) for user in results]
 
         return users
 
     # Read Method
 
     @classmethod
-    def get_user(cls, user_id: int) -> Union['User', bool]:
+    def get_user_by_id(cls, user_id: int) -> Union['User', Literal[False]]:
         """
         Queries the 'users' table in the database and returns the one record
         where the id is equal to the 'user_id' arg as an instance of the User
         class.
 
         Args: 
-            cls: The User Class
-            user_id: An integer representing the id of the user being queried
+            cls (class): The User Class
+            user_id (int): The id of the user to be queried from the database.
+
 
         Returns:
             Self: An instance of the User class with self.id = user_id
+
+        Notes:
+            This is a class method for the User class.
         """
 
         # Set select query where id = user_id
         query: str = '''
                     SELECT * FROM users
-                    WHERE id = %(user_id)s
-                    '''
+                    WHERE id = %(id)s;
+        '''
 
         # Set dictionary for data to be passed into the query
-        user_id: dict[str, int] = {'id': user_id}
+        data: dict[str, int] = {'id': user_id}
         # Run query method on database connection class
-        results: list[Tuple[str: Any]] = connectToMySQL(db=cls.db).query_db(
-            query=query, data=user_id)
+        results: list[Tuple[str: Any]] = connectToMySQL(db=cls.database).query_db(
+            query=query, data=data)
 
         # Extract the user_data Dict from the results list
         user_data: Dict[str, Any] = results[0]
@@ -84,31 +92,95 @@ class User:
             print(f"Failed to create user: {e}")
             return False
 
-    # Create Method, Union type hinting means that it can be one of multiple possible types, but only those included
-    # In the list
+    # Create Method
 
     @classmethod
-    def create_user(cls, user_data) -> Union[NoReturn, Literal[False]]:
+    def create_user(cls, user_data: dict[str, Any]) -> int | Literal[False]:
         """
         Queries the 'users' table in the database to create a row with the
         user input data
 
         Args: 
-            cls: The User Class
-            user_data: An dictionary holding all the user input data
+            cls (class): The User Class
+            user_data (dict): A dictionary holding all the user input data
 
         Returns:
-            None | Literal[False]: Returns nothing if successful, or False and prints the error if it failed
+            None | False: Returns nothing if successful, or False and prints the error if it failed
+
+        Notes:
+            This is a class method for the User class.
         """
 
         # Set query to insert row into users table in the database
-        query = '''
+        query: str = '''
                 INSERT INTO users (first_name, last_name, email)
                 VALUES (%(first_name)s, %(last_name)s, %(email)s);
-                '''
+        '''
 
         # Call connection method and query the database to create user and store result as a variable
-        result: Union[NoReturn, Literal[False]] = connectToMySQL(
-            db=cls.db).query_db(query=query, data=user_data)
+        result: int | Literal[False] = connectToMySQL(
+            db=cls.database).query_db(query=query, data=user_data)
 
         return result
+
+    # Update User Method
+
+    @classmethod
+    def update_user(cls, user_data: dict[str, Any]) -> NoReturn | Literal[False]:
+        """
+        Updates the user in the database
+
+
+        Args:
+            cls (class): The User class.
+            user_data (dict): A dictionary holding all the user input data.
+
+        Returns:
+            None | False: Returns nothing if successful, or False and prints the error if it failed.
+
+        Notes:
+            This is a class method for the User class.
+        """
+
+        # Set query to insert row into users table in the database
+        query: str = '''
+                UPDATE users
+                SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s
+                WHERE id = %(id)s;
+        '''
+
+        # Call connection method and query the database to create user and store result as a variable
+        result: NoReturn | Literal[False] = connectToMySQL(
+            db=cls.database).query_db(query=query, data=user_data)
+
+        return result
+
+    # Delete User Method
+
+    @classmethod
+    def delete_user(cls, user_id: int) -> NoReturn | Literal[False]:
+        """
+        Deletes the user from the database.
+
+        Args:
+            cls (class): The User class.
+            user_id (int): The id of the user to delete from the database.
+
+        Returns:
+            NoReturn: If successful nothing is returned.
+            False: If the query fails False is returned and the error message is printed.
+
+        Notes:
+            This is a class method for the User class.
+        """
+
+        query: str = '''
+                    DELETE FROM users
+                    WHERE id = %(id)s;
+        '''
+        data: dict[str, int] = {'id': user_id}
+
+        results: NoReturn | Literal[False] = connectToMySQL(
+            db=cls.database).query_db(query=query, data=data)
+
+        return results
