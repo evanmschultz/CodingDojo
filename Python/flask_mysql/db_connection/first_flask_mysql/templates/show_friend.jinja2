@@ -80,6 +80,10 @@
 						<button type="submit">Save</button>
 						<button type="button" onclick="location.href='/show_friend/{{ friend.id }}'">Cancel</button>
 					</form>
+
+					<form action="/delete_friend/{{ friend.id }}" method="POST">
+						<button type="submit">Delete Friend</button>
+					</form>
 				</div>
 
 				{% else %}

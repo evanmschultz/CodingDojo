@@ -1,4 +1,5 @@
 # Import the function that will return an instance of a connection
+from unittest import result
 from mysql_connection import connectToMySQL
 
 
@@ -63,6 +64,21 @@ class Friend:
                 WHERE id = %(id)s;
                 '''
 
+        results = connectToMySQL(db=cls.database).query_db(
+            query=query, data=data)
+
+        return results
+
+    # DELETE Method
+
+    @classmethod
+    def delete_friend(cls, friend_id):
+        query = '''
+                DELETE FROM friends
+                WHERE id = %(id)s;
+                '''
+
+        data = {'id': friend_id}
         results = connectToMySQL(db=cls.database).query_db(
             query=query, data=data)
 
