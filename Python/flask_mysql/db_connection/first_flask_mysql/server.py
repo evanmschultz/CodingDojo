@@ -1,6 +1,9 @@
+from crypt import methods
+from pydoc import doc
 from flask import Flask, redirect, render_template, request
 # import the class from friend.py
 from friend import Friend
+
 app = Flask(__name__)
 
 
@@ -12,13 +15,6 @@ def index():
     return render_template("index.jinja2", all_friends=friends)
 
 
-@app.route(("/show_friend/<int:friend_id>"))
-def show_friend(friend_id):
-    friend = Friend.get_friend_by_id(friend_id)
-
-    return render_template("show_friend.jinja2", friend=friend)
-
-
 @app.route('/create_friend', methods=["POST"])
 def create_friend():
     # First we make a data dictionary from our request.form coming from our template.
@@ -28,6 +24,28 @@ def create_friend():
     # We pass the data dictionary into the save method from the Friend class.
     Friend.save(data)
     # Don't forget to redirect after saving to the database.
+    return redirect('/')
+
+
+@app.route("/show_friend/<int:friend_id>", methods=['GET'])
+def show_friend(friend_id):
+    friend = Friend.get_friend_by_id(friend_id)
+
+    return render_template("show_friend.jinja2", friend=friend, editing=False)
+
+
+@app.route("/edit_friend/<int:friend_id>", methods=['GET'])
+def edit_friend(friend_id):
+    friend = Friend.get_friend_by_id(friend_id)
+
+    return render_template("show_friend.jinja2", friend=friend, editing=True)
+
+
+@app.route('/update_friend/', methods=['POST'])
+def update_friend():
+    data = request.form
+    Friend.update_friend(data)
+
     return redirect('/')
 
 

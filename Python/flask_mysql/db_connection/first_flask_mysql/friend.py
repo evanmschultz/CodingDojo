@@ -4,7 +4,7 @@ from mysql_connection import connectToMySQL
 
 # Model the class after the friend table from our database
 class Friend:
-    db = 'flask_friends'
+    database = 'flask_friends'
 
     def __init__(self, data):
         self.id = data['id']
@@ -14,7 +14,7 @@ class Friend:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
-    # READ methods
+    # READ Methods
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM friends;"
@@ -34,12 +34,13 @@ class Friend:
                 """
 
         data = {"id": id}
-        results = connectToMySQL(db=cls.db).query_db(query=query, data=data)
+        results = connectToMySQL(db=cls.database).query_db(
+            query=query, data=data)
         friend = results[0]
 
         return cls(friend)
 
-    # CREATE method
+    # CREATE Method
     @classmethod
     def save(cls, data):
         query = """
@@ -48,7 +49,21 @@ class Friend:
                 """
 
         # The data is a dictionary that will be passed into the save method from server.py
-        result = connectToMySQL(db=cls.db).query_db(
+        result = connectToMySQL(db=cls.database).query_db(
             query=query, data=data)
 
         return result
+
+    # UPDATE Method
+    @classmethod
+    def update_friend(cls, data):
+        query = '''
+                UPDATE friends
+                SET first_name = %(first_name)s, last_name = %(last_name)s, occupation = %(occupation)s
+                WHERE id = %(id)s;
+                '''
+
+        results = connectToMySQL(db=cls.database).query_db(
+            query=query, data=data)
+
+        return results

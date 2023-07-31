@@ -1,91 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+
+<head>
+	{#
+	<!-- Basic Page Needs
+													-->
+	#}
+	<meta charset="utf-8" />
+	<title>Flask Friends</title>
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	{#
+	<!-- Mobile Specific Metas
+													-->
+	#}
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	{#
+	<!-- FONT
+													-->
+	#}
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+
+	{#
+	<!-- Script
+													-->
+	#}
+	<script src="static/js/script.js"></script>
+
+	{#
+	<!-- CSS
+													-->
+	#}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+	<link rel="stylesheet" href="../static/index.css" />
+
+	{#
+	<!-- Favicon
+													-->
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	#}
+</head>
+
+<body>
+
+	{#
+	<!-- Start Document Header
+													-->
+	#}
+	<header class="container-fluid">
+		<h1>{{ friend.first_name }} {{ friend.last_name }}</h1>
+		<form action="/" method="GET">
+			<button>Home</button>
+		</form>
+	</header>
+
+	{#
+	<!-- End Document Header
+													-->
+	#}
+	<main class="container-fluid">
+
 		{#
-		<!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<!-- Start Display Friends
+													-->
 		#}
-		<meta charset="utf-8" />
-		<title>Flask Friends</title>
-		<meta name="description" content="" />
-		<meta name="author" content="" />
+		<div class="grid">
+			<article>
+				{% if editing %}
 
-		{#
-		<!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<div>
+					<form action="/update_friend/" method="POST">
+						<input type="hidden" name="id" value="{{ friend.id }}" />
+						<input type="text" name="first_name" value="{{ friend.first_name }}" /><br />
+						<input type="text" name="last_name" value="{{ friend.last_name }}" /><br />
+						<input type="text" name="occupation" value="{{ friend.occupation }}" /><br />
 
-		{#
-		<!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
-			rel="stylesheet"
-			type="text/css"
-		/>
+						<button type="submit">Save</button>
+						<button type="button" onclick="location.href='/show_friend/{{ friend.id }}'">Cancel</button>
+					</form>
+				</div>
 
-		{#
-		<!-- Script
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<script src="static/js/script.js"></script>
+				{% else %}
 
-		{#
-		<!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-		/>
-		<link rel="stylesheet" href="../static/index.css" />
+				<div>
+					<h2>{{ friend.first_name }} {{ friend.last_name }}</h2>
+					<p>{{ friend.occupation }}</p>
 
-		{#
-		<!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		<link rel="icon" type="image/png" href="images/favicon.png" />
-		#}
-	</head>
-	<body>
+					<button type="button" onclick="location.href='/edit_friend/{{ friend.id }}'">Edit Friend</button>
+				</div>
 
-		{#
-		<!-- Start Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-		<header class="container-fluid">
-			<h1>{{ friend.first_name }} {{ friend.last_name }}</h1>
-            <form action="/" method="GET">
-                <button>Home</button>
-            </form>
-		</header>
+				{% endif %}
+			</article>
 
-		{#
-		<!-- End Document Header
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#} 
-		<main class="container-fluid">
+		</div>
+	</main>
 
-			{#
-			<!-- Start Display Friends
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-			#}
-			<div class="grid">
-					<article>
-						<h2>{{ friend.first_name }} {{ friend.last_name }}</h2>
+	{#
+	<!-- End Main
+ 														-->
+	#}
+</body>
 
-						<p>{{ friend.occupation }}</p>
-						<form action="/friends/update/{{ friend.id }}" method="POST">
-							<button type="submit">Edit Friend</button>
-						</form>
-					</article>
-			</div>
-		</main>
-
-		{#
-		<!-- End Main
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-		#}
-	</body>
 </html>
