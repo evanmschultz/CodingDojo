@@ -1,5 +1,5 @@
 # Database connection instance
-from mysql_connection import connectToMySQL
+from flask_app.config.mysql_connection import connectToMySQL
 # Type hinting imports
 from typing import Any, Dict, Literal, NoReturn, Self, Tuple, Union
 
