@@ -1,7 +1,7 @@
 # A cursor is the object we use to interact with the database and has built in methods
 import pymysql.cursors
 # Type hinting imports
-from typing import Any, Literal, Tuple
+from typing import Any, Literal
 
 
 class MySQLConnection:
@@ -30,7 +30,7 @@ class MySQLConnection:
         # Establish the connection to the database
         self.connection = connection
 
-    def query_db(self, query: str, data: dict[str, Any] = None) -> int | Tuple[dict[str, Any], ...] | Literal[False] | None:
+    def query_db(self, query: str, data: dict[str, Any] = {}) -> int | tuple[dict[str, Any]] | Literal[False] | None:
         """
         Executes a SQL query on the database. Depending on the type of query, different results are returned.
 
@@ -73,7 +73,7 @@ class MySQLConnection:
                     # SELECT queries will return the data from the database as a TUPLE OF DICTIONARIES using pymysql
                     self.connection.commit()
 
-                    result: Tuple[dict[str, Any]] = cursor.fetchall()
+                    result: tuple[dict[str, Any]] = cursor.fetchall()
                     return result
 
                 else:
@@ -91,12 +91,12 @@ class MySQLConnection:
                 self.connection.close()
 
 
-def connectToMySQL(db) -> MySQLConnection:
+def connectToMySQL(db: str) -> MySQLConnection:
     """
     Instantiates an instance of the MySQLConnection class to create a connection to the database argument.
 
     Args:
-        db: A string of the name of the database to create a connection with
+        db (str): A string of the name of the database to create a connection with
 
     Returns:
         MySQLConnection(db): An instance of the connection

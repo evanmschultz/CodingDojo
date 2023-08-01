@@ -1,4 +1,6 @@
-from flask import Flask, Response, redirect, render_template, request, url_for
+from typing import Literal
+from flask import Flask, redirect, render_template, request, url_for
+from werkzeug import Response
 from user import User
 
 
@@ -40,7 +42,11 @@ def create_user() -> Response:
 # Show User Route
 @app.route(rule='/user/<int:user_id>', methods=['GET'])
 def show_user(user_id) -> str:
-    user: User = User.get_user_by_id(user_id=user_id)
+    user: User | Literal[False] = User.get_user_by_id(user_id=user_id)
+
+    if not user:
+        print(
+            f"\n\n{'_'*80}show_user:\n\nUser.get_user_by_id() returned False\n{'_'*80}")
 
     return render_template(template_name_or_list='user.jinja2', user=user, editing=False)
 
@@ -48,7 +54,11 @@ def show_user(user_id) -> str:
 # Edit User Form Route
 @app.route(rule='/edit_user/<int:user_id>', methods=['GET'])
 def edit_user_display(user_id) -> str:
-    user: User = User.get_user_by_id(user_id=user_id)
+    user: User | Literal[False] = User.get_user_by_id(user_id=user_id)
+
+    if not user:
+        print(
+            f"\n\n{'_'*80}edit_user_display:\n\nUser.get_user_by_id() returned False\n{'_'*80}")
 
     return render_template(template_name_or_list='user.jinja2', user=user, editing=True)
 

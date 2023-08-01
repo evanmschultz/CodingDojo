@@ -1,4 +1,3 @@
-import datetime
 # Database connection instance
 from mysql_connection import connectToMySQL
 # Type hinting imports
@@ -8,13 +7,13 @@ from typing import Any, Dict, Literal, NoReturn, Self, Tuple, Union
 class User:
     database: str = 'users'
 
-    def __init__(self, data) -> NoReturn:
+    def __init__(self, data: dict) -> None:
         self.id: int = data['id']
         self.first_name: str = data['first_name']
         self.last_name: str = data['last_name']
         self.email: str = data['email']
-        self.created_at: datetime = data['created_at']
-        self.updated_at: datetime = data['updated_at']
+        self.created_at: str = data['created_at']
+        self.updated_at: str = data['updated_at']
 
     # READ Method
 
@@ -39,11 +38,13 @@ class User:
         query: str = 'SELECT * FROM users;'
 
         # Get users list from database
-        results: int | tuple[dict[str, Any], ...] | Literal[False] | None = connectToMySQL(
-            db=cls.database).query_db(query=query)
+        results: tuple[dict[str, Any], ...] | Literal[False] = connectToMySQL(
+            db=cls.database).query_db(query=query)  # type: ignore
 
         print(results)
-        users: list[Self] = [cls(user) for user in results]
+        users = []
+        if results:
+            users: list[Self] = [cls(user) for user in results]
 
         return users
 
@@ -77,11 +78,17 @@ class User:
         # Set dictionary for data to be passed into the query
         data: dict[str, int] = {'id': user_id}
         # Run query method on database connection class
-        results: list[Tuple[str: Any]] = connectToMySQL(db=cls.database).query_db(
-            query=query, data=data)
+        results: list[dict[str, Any]] | Literal[False] = connectToMySQL(db=cls.database).query_db(
+            query=query, data=data)  # type: ignore
 
-        # Extract the user_data Dict from the results list
-        user_data: Dict[str, Any] = results[0]
+        user_data: dict[str, Any] = {}
+        if results:
+            # Extract the user_data Dict from the results list
+            user_data = results[0]
+            ...
+        else:
+            # Handle the case where the query failed or returned no results
+            print("No results found or the query failed.")
 
         try:
             # Try to instantiate the user and return the instance
@@ -119,7 +126,7 @@ class User:
 
         # Call connection method and query the database to create user and store result as a variable
         result: int | Literal[False] = connectToMySQL(
-            db=cls.database).query_db(query=query, data=user_data)
+            db=cls.database).query_db(query=query, data=user_data)  # type: ignore
 
         return result
 
@@ -151,7 +158,7 @@ class User:
 
         # Call connection method and query the database to create user and store result as a variable
         result: NoReturn | Literal[False] = connectToMySQL(
-            db=cls.database).query_db(query=query, data=user_data)
+            db=cls.database).query_db(query=query, data=user_data)  # type: ignore
 
         return result
 
@@ -181,6 +188,6 @@ class User:
         data: dict[str, int] = {'id': user_id}
 
         results: NoReturn | Literal[False] = connectToMySQL(
-            db=cls.database).query_db(query=query, data=data)
+            db=cls.database).query_db(query=query, data=data)  # type: ignore
 
         return results
