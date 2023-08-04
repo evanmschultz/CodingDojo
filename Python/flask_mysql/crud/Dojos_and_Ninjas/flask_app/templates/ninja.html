@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>Ninja</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/normalize.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/skeleton.css') }}"
+		/>
+
+		<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="icon"
+			type="image/png"
+			href="{{ url_for('static', filename='assests/CodingDojoLogo.png') }}"
+		/>
+	</head>
+	<body>
+		<!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<main class="container">
+			<div class="row">
+				<div class="one-half column" style="margin-top: 5%">
+					<h1>
+						{% if not ninja %} New Ninja {% else %} Edit Ninja {%
+						endif %}
+					</h1>
+
+					<div>
+						<form
+							action="{{ url_for('update_ninja', ninja_id=ninja.id) if ninja else url_for('create_ninja') }}"
+							method="POST"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 1.5rem;
+							"
+						>
+							<input
+								type="hidden"
+								name="id"
+								value="{{ ninja.id }}"
+							/>
+							<select
+								name="dojo_id"
+								style="
+									margin-bottom: 1.5rem;
+									width: fit-content;
+								"
+							>
+								{% for dojo in dojos %} {% if dojo.id == dojo_id
+								%}
+								<option value="{{ dojo.id }}" selected>
+									{{ dojo.name }}
+								</option>
+								{% else %}
+								<option value="{{ dojo.id }}">
+									{{ dojo.name }}
+								</option>
+								{% endif %} {% endfor %}
+							</select>
+							<input
+								type="text"
+								name="first_name"
+								placeholder="First Name"
+								style="width: fit-content"
+								value="{{ ninja.first_name if ninja }}"
+							/>
+							<input
+								type="text"
+								name="last_name"
+								placeholder="Last Name"
+								style="width: fit-content"
+								value="{{ ninja.last_name if ninja }}"
+							/>
+							<input
+								type="number"
+								name="age"
+								placeholder="Age"
+								style="width: fit-content"
+								value="{{ ninja.age if ninja }}"
+							/>
+							<input
+								type="submit"
+								value="Submit"
+								style="margin-top: 1.5rem"
+							/>
+							<button type="submit">
+								<a href="/dojos/{{ dojo_id }}">Cancel</a>
+							</button>
+							<form action="/delete_ninja" method="POST">
+								<input type="submit" value="Delete" />
+							</form>
+						</form>
+					</div>
+					<button style="margin-top: 1.5rem">
+						<a href="/dojos"> Home </a>
+					</button>
+				</div>
+			</div>
+		</main>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>

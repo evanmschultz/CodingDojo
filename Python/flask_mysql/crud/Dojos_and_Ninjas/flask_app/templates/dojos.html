@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>Dojos</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/normalize.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/skeleton.css') }}"
+		/>
+
+		<!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="icon"
+			type="image/png"
+			href="{{ url_for('static', filename='assests/CodingDojoLogo.png') }}"
+		/>
+	</head>
+	<body>
+		<!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<main class="container" style="padding-top: 10vh">
+			<div class="row">
+				{% if display_all %}
+				<div class="one-half column" style="margin-top: 5%">
+					<h2>New Dojo</h2>
+					<div>
+						<form
+							action="/create_dojo"
+							method="POST"
+							style="display: flex; flex-direction: column"
+						>
+							<input
+								type="text"
+								name="name"
+								placeholder="Dojo Name"
+								style="width: fit-content"
+							/>
+							<input
+								type="submit"
+								value="Submit"
+								style="margin-top: 1.5rem"
+							/>
+						</form>
+					</div>
+				</div>
+				{% endif %}
+				<div class="one-half column" style="margin-top: 5%">
+					<h2>
+						{% if display_all %} All Dojos {% else %}
+						<div
+							style="
+								display: flex;
+								justify-content: flex-start;
+								align-items: flex-end;
+								gap: 3rem;
+							"
+						>
+							{% if not editing %} {{ dojo.name}}
+							<button>
+								<a href="/dojos/{{ dojo.id }}/edit">
+									Edit Dojo
+								</a>
+							</button>
+
+							{% else %}
+							<form action="/update_dojo" method="POST">
+								<input
+									type="text"
+									name="name"
+									placeholder="{{ dojo.name }}"
+								/>
+								<input
+									type="hidden"
+									name="id"
+									value="{{ dojo.id }}"
+								/>
+								<div class="grid">
+									<input
+										type="submit"
+										value="Submit"
+										style="margin-top: 5.5%"
+									/>
+									<div class="flex-column">
+										<form
+											action="/delete_dojo"
+											method="POST"
+										>
+											<input
+												type="submit"
+												value="Delete"
+											/>
+										</form>
+										<form action="/dojos/{{ dojo.id }}">
+											<input
+												type="submit"
+												value="Cancel"
+											/>
+										</form>
+									</div>
+								</div>
+							</form>
+							{% endif %}
+						</div>
+						{% endif %}
+					</h2>
+					<div class="u-border" style="margin-top: 5%">
+						<table>
+							<tbody>
+								{% if display_all %} {% for dojo in dojos %}
+								<tr class="dojo">
+									<td><p>{{ dojo.name }}</p></td>
+									<td>
+										<a href="/dojos/{{ dojo.id }}">
+											<button>Show Dojo</button>
+										</a>
+									</td>
+								</tr>
+								{% endfor %} {% else %} {% for ninja in ninjas
+								%}
+								<tr class="ninja">
+									<td><p>{{ ninja.first_name }}</p></td>
+									<td><p>{{ ninja.last_name }}</p></td>
+									<td><p>{{ ninja.age }}</p></td>
+									<td>
+										<a
+											href="/ninja/{{ ninja.id }}/dojo/{{ dojo.id }}"
+										>
+											<button>Edit Ninja</button>
+										</a>
+									</td>
+								</tr>
+								{% endfor %} {% endif %}
+							</tbody>
+						</table>
+					</div>
+					<a
+						{%
+						if
+						display_all
+						%}
+						href="/ninja"
+						{%
+						else
+						%}
+						href="/ninja/{{ dojo.id }}"
+						{%
+						endif
+						%}
+					>
+						<button style="margin-top: 1.5rem">Add Ninja</button>
+					</a>
+				</div>
+			</div>
+			{% if not display_all %}
+			<button>
+				<a href="/dojos"> Home </a>
+			</button>
+			{% endif %}
+		</main>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>

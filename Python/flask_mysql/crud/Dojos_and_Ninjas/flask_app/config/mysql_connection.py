@@ -1,5 +1,4 @@
 import pymysql.cursors
-from flask_app.config.mysql_connection import connectToMySQL
 from datetime import datetime
 
 
@@ -44,14 +43,14 @@ class MySQLConnection:
                 cursor.execute(query)
 
                 # SELECT query
-                if query.lower().find('select'):
+                if query.lower().find('select') >= 0:
                     self.connection.commit()
 
                     results: tuple[dict[str, str | int |
                                         datetime], ...] = cursor.fetchall()
                     return results
                 # INSERT query
-                elif query.lower().find('insert'):
+                elif query.lower().find('insert') >= 0:
                     self.connection.commit()
                     row_id: int = cursor.lastrowid
                     return row_id
