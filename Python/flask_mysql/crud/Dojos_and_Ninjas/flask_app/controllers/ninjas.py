@@ -39,12 +39,10 @@ def create_ninja() -> Response:
 
 
 # Update Ninja Route
-@app.route('/ninja/<int:ninja_id>/update', methods=['POST'])
-def update_ninja(ninja_id: int) -> Response:
+@app.route('/ninja/update', methods=['POST'])
+def update_ninja() -> Response:
     """Update a ninja's information."""
-    ninja_data: dict[str, int | str] = dict(request.form)
-    print(f"\n\n{'_'*80}\n\nninja_data\n\n{ninja_data}\n{'_'*80}")
-    ninja_data['id'] = ninja_id
+    ninja_data: dict = request.form
     dojo_id: int = int(ninja_data['dojo_id'])
 
     Ninja.update_ninja(ninja_data)

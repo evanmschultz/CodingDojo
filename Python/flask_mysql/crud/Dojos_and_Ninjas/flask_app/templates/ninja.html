@@ -52,7 +52,7 @@
 
 					<div>
 						<form
-							action="{{ url_for('update_ninja', ninja_id=ninja.id) if ninja else url_for('create_ninja') }}"
+							action="{{ url_for('update_ninja') if ninja else url_for('create_ninja') }}"
 							method="POST"
 							style="
 								display: flex;
