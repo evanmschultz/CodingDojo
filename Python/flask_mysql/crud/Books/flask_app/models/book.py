@@ -13,6 +13,7 @@ class Book:
         self.id: int = data['id']
         self.title: str = data['title']
         self.num_of_pages: int = data['num_of_pages']
+        self.favorites: List = []
         self.created_at: datetime = data['created_at']
         self.updated_at: datetime = data['updated_at']
 
@@ -98,7 +99,3 @@ class Book:
             cls.database).query_db(query, book_data)  # type: ignore
 
         return book_id
-
-    # TODO: Add add_favorite method
-    # TODO: Don't forget to add docstrings here and above
-    # TODO: Don't forget to complete author.py and the routes

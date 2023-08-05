@@ -6,7 +6,9 @@ from flask import redirect, render_template, request, url_for
 
 # Type hinting imports
 from werkzeug import Response
-from typing import List
+from typing import List, Tuple
+
+from pprint import pprint
 
 
 # Books Route
@@ -14,30 +16,34 @@ from typing import List
 @app.route('/books/<int:book_id>', methods=['GET'])
 def books(book_id: int | None = None) -> str:
     """
-    Gets all the books and displays them on the page with a menu to add a book.
+    Gets book(s) and displays them on the page.
 
-    If there is an id the page only displays that book with a an option menu to
-    have any of the authors favorite that book.
+    If (book_id) is not provided, the page displays all books.
+    If an (book_id) is provided, the page only displays the book with that ID
+    with a list of all the authors who favorited the book as well as all the authors 
+    in the database so the user can have the author favorite the displayed book.
+
+    Returns:
+        str: The rendered HTML template for the books page.
     """
     display_single: bool = False
     authors = []
-    favorites = []
+    favorites = ()
 
     if not book_id:
         books: List[Book] = Book.get_books()
     else:
         books: List[Book] = Book.get_books(True, book_id)
-        favorites: List[Favorite] = Favorite.get_favorites('book', book_id)
-        display_single = True
-
+        favorites: Tuple = Favorite.get_favorites('book', book_id)
         authors: List[Author] = Author.get_authors()
+        display_single = True
 
     return render_template('books.html', books=books, display_single=display_single, authors=authors, favorites=favorites)
 
 
 @app.route('/create_book', methods=['POST'])
 def create_book() -> Response:
-
+    """Creates a book in the database and redirects to that book's page."""
     book_data = request.form
     book_id: int = Book.create_book(book_data)
 
@@ -45,8 +51,10 @@ def create_book() -> Response:
 
 
 @app.route('/books/add_favorite', methods=['POST'])
-def add_favorite():
+def add_favorite_author():
+    """Adds an author that favorited the book."""
     favorite_data = request.form
-    Favorite.add_favorite(favorite_data)
     book_id: int = int(favorite_data['book_id'])
+    Favorite.add_favorite(favorite_data)
+
     return redirect(url_for('books', book_id=book_id))

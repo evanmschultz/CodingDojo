@@ -93,9 +93,9 @@
 				{% else %}
 				<div class="u-border u-margin-top">
 					<table>
-						{% for favorite in favorites %}
+						{% for author in favorites %}
 						<tr>
-							<td>{{ favorite.name }}</td>
+							<td>{{ author.name }}</td>
 						</tr>
 						{% endfor %}
 					</table>
@@ -154,7 +154,7 @@
 
 				{% else %}
 				<form
-					action="books/add_favorite"
+					action="/books/add_favorite"
 					class="new-item u-margin-top"
 					method="POST"
 				>

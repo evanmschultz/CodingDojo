@@ -1,9 +1,3 @@
-# TODO: Add get_favorites method
-# TODO: Add add_favorite method
-# TODO: Don't forget to add docstrings
-# TODO: Don't forget to complete book.py and the routes
-
-
 from flask_app.config.mySQLConnection import connectToMySQL
 from flask_app.models import book
 
@@ -104,8 +98,3 @@ class Author:
             cls.database).query_db(query, author_data)  # type: ignore
 
         return author_id
-
-    # TODO: Add get_favorites method
-    # TODO: Add add_favorite method
-    # TODO: Don't forget to add docstrings
-    # TODO: Don't forget to complete book.py and the routes
