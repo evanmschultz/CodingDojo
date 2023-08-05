@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>Authors</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/normalize.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/skeleton.css') }}"
+		/>
+
+		<!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="icon"
+			type="image/png"
+			href="{{ url_for('static', filename='assests/CodingDojoLogo.png') }}"
+		/>
+	</head>
+	<body>
+		<!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<main
+			class="container"
+			style="
+				padding-top: 10vh;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			"
+		>
+			<!-- Left of Page
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<div class="container">
+				<h2>
+					{% if not display_single %} New Author {% else %} {{
+					authors[0].name }}'s Favorites {% endif %}
+				</h2>
+
+				<!--------------------------  
+					Display All 
+						Create Author
+						–––––––––––––––––––– -->
+
+				{% if not display_single %}
+				<form
+					action="/create_author"
+					method="POST"
+					class="new-item u-margin-top"
+				>
+					<input
+						type="text"
+						name="name"
+						placeholder="Author Name"
+						style="width: 100%"
+					/>
+					<input type="submit" value="Add Author" />
+				</form>
+
+				<!-------------------------- 
+					Display One 
+						Add Favorite Book
+						–––––––––––––––––––– -->
+
+				{% else %}
+				<div class="u-border u-margin-top">
+					<!----------------------------------------------------
+TODO: Show books the author favorited
+-------------------------------- -->
+					<table>
+						<thead>
+							<tr class="book-row">
+								<th>Title</th>
+								<th>Number of Pages</th>
+							</tr>
+						</thead>
+						{% for book in books %}
+						<tr class="book-row">
+							<td>{{ book.title }}</td>
+							<td>{{ book.num_of_pages }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+				{% endif %}
+
+				<!-------------------------- 
+					Always Display 
+						Route Buttons
+						–––––––––––––––––––– -->
+
+				<button class="route-button">
+					{% if not display_single %}
+					<a href="/books">Books</a>
+					{% else %}
+					<a href="/authors">Authors</a>
+					{% endif %}
+				</button>
+			</div>
+
+			<!-- Right of Page
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<div class="container">
+				<h2>
+					{% if not display_single %} All Authors {% else %} Add {{
+					authors[0].name }}'s Favorite {% endif %}
+				</h2>
+
+				<!-------------------------- 
+					Display All
+						Authors Table
+						–––––––––––––––––––– -->
+
+				{% if not display_single %}
+				<div class="u-border u-margin-top">
+					<table>
+						{% for author in authors %}
+						<tr>
+							<td>
+								<a href="/authors/{{ author.id }}"
+									>{{ author.name }}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+
+				<!-------------------------- 
+					Display One
+						Add Favorite Book
+						–––––––––––––––––––– -->
+
+				{% else %}
+				<form
+					action="authors/add_favorite"
+					class="new-item u-margin-top"
+				>
+					<input
+						type="hidden"
+						name="id"
+						value="{{ authors[0].id }}"
+					/>
+					<select name="favorite">
+						{% for book in books %}
+						<option value="{{ book.id }}">{{ book.title }}</option>
+						{% endfor %}
+					</select>
+					<input type="submit" value="Add" />
+				</form>
+				{% endif %}
+			</div>
+		</main>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>
