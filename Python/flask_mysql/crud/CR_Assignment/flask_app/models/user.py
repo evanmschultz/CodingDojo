@@ -1,3 +1,5 @@
+import re
+from flask import flash
 # Database connection instance
 from flask_app.config.mysql_connection import connectToMySQL
 # Type hinting imports
@@ -191,3 +193,33 @@ class User:
             db=cls.database).query_db(query=query, data=data)  # type: ignore
 
         return results
+
+    @staticmethod
+    def validate_user(user_data: Dict) -> bool:
+        """
+        Validates user inputs.
+
+        Args:
+            user_data (Dict): The user_data from the input form.
+                {'first_name': str, 'last_name': str, 'email': str}
+
+        Returns:
+            boolean: True if validation checks pass, False otherwise.
+
+        Raises:
+            Flash messages
+        """
+        EMAIL_REGEX = re.compile(
+            r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
+        is_valid = True
+        if len(user_data['first_name']) < 1:
+            flash("First Name must be at least 1 character long.", 'error')
+            is_valid = False
+        if len(user_data['last_name']) < 1:
+            flash("Last Name must be at least 1 character long.", 'error')
+            is_valid = False
+        if not EMAIL_REGEX.match(user_data['email']):
+            flash("Invalid email address!", 'error')
+            is_valid = False
+        return is_valid

@@ -66,6 +66,14 @@
 		#}
 		<h2>Add a User</h2>
 
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		{% for message in messages %}
+		<p>{{ message }}</p>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+
 		<form action="/create_user" method="POST">
 
 			<label for="first_name">First Name:</label>

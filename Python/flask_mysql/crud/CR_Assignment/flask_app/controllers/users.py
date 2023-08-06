@@ -31,8 +31,11 @@ def create_user() -> Response:
     # Create a dict from request.form (make sure the keys lineup perfectly with the query in create_user())
     user_data: dict[str, str] = request.form
 
+    if not User.validate_user(user_data=user_data):
+        return redirect(location='/add_user')
+
     # Call the class method create_user() with the input data
-    User.create_user(user_data=user_data)\
+    User.create_user(user_data=user_data)
 
     # Redirect to the index page
     return redirect(location='/')
@@ -66,6 +69,10 @@ def edit_user_display(user_id) -> str:
 @app.route(rule='/update_user', methods=['POST'])
 def update_user() -> Response:
     user_data: dict[str, str] = request.form
+    user_id: int = int(user_data['id'])
+
+    if not User.validate_user(user_data=user_data):
+        return redirect(location=url_for(endpoint='edit_user_display', user_id=user_id))
 
     User.update_user(user_data=user_data)
 
