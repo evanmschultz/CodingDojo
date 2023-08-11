@@ -1,10 +1,10 @@
-# TODO: PASSWORD_REGEX
+from flask import flash
+from flask_bcrypt import Bcrypt
+from pydantic import ValidationError
 
 from flask_app import app
 from flask_app.config.mySQLConnection import connectToMySQL
-from flask import flash
-from flask_bcrypt import Bcrypt
-import re
+from flask_app.models.user_validation import UserData
 
 # Type hinting and pretty print imports
 from typing import Dict, Optional, Tuple
@@ -12,7 +12,8 @@ from datetime import datetime
 
 
 class User:
-    bcrypt = Bcrypt()  # You can initialize Bcrypt without the app object
+    """The User class"""
+    bcrypt = Bcrypt()
     database: str = 'user_logins'
 
     def __init__(self, user_data: Dict) -> None:
@@ -34,14 +35,14 @@ class User:
             password (str): The user's raw password.
 
         Returns:
-            hashed_password (str): The hash created from the password.
+            str: The hash created from the password.
         """
         hashed_password: str = User.bcrypt.generate_password_hash(
             password).decode('utf-8')
         return hashed_password
 
     @staticmethod
-    def check_password(hashed_password: str, password: str) -> bool:
+    def check_password(hashed_password: str, input_password: str) -> bool:
         """
         Checks the user input password against the hashed password in the database.
 
@@ -49,11 +50,12 @@ class User:
             password (str): The user's raw password.
 
         Returns:
-            hashed_password (str): The hash created from the password.
+            bool: True if the input_password matches the password
+            in the database and False if not.
         """
-        valid_password: bool = User.bcrypt.check_password_hash(
-            hashed_password, password)
-        return valid_password
+        correct_password: bool = User.bcrypt.check_password_hash(
+            hashed_password, input_password)
+        return correct_password
 
     @classmethod
     def get_user_by_email(cls, data):
@@ -64,7 +66,7 @@ class User:
             email (str): The user's email.
 
         Returns:
-            user (User): An instance of the User class.
+            User: An instance of the User class.
         """
         query: str = '''
                     SELECT * FROM users
@@ -95,7 +97,7 @@ class User:
             password (str): The user's raw password.
 
         Returns:
-            user_id (int): The ID of the created user.
+            int: The ID of the created user.
         """
         hashed_password: str = User.hash_password(data['password'])
         data['password'] = hashed_password
@@ -111,17 +113,10 @@ class User:
     @staticmethod
     def validate_user(user_data: Dict) -> bool:
         """
-        Validates user inputs.
-
-        first_name: Must be length of at least 1.
-        last_name: must be length of at least 1.
-        email: Must be a valid email address.
-        password: Must have at least one of each, lowercase letter, uppercase letter,
-            number, and special character, as well as be at least 8 characters long.
-        confirm_password: Must match password.
+        Validates user inputs using the Pydantic schema in the user_validation model.
 
         Args:
-            user_data (Dict): The user_data from the input form:
+            user_data (Dict): The user_data from the input form.
                 {
                     'first_name': str, 
                     'last_name': str, 
@@ -134,49 +129,17 @@ class User:
             boolean: True if validation checks pass, False otherwise.
 
         Raises:
-            Flash messages
+            Flash messages constructed from the ValueErrors in the UserData class.
         """
-        EMAIL_REGEX: re.Pattern[str] = re.compile(
-            r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
-        '''Password requirements (at least one of each): [a-z] (lowercase), [A-Z] (uppercase)
-            [0-9] (numeric), (\\W) (non-alphanumeric)'''
-        PASSWORD_REGEX: re.Pattern[str] = re.compile(
-            r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).+$')
-
-        is_valid: bool = True
-
-        # First Name
-        if len(user_data['first_name'].strip()) < 1:
-            flash("First Name must be at least 1 character long.", 'register_error')
-            is_valid = False
-
-        # Last Name
-        if len(user_data['last_name'].strip()) < 1:
-            flash("Last Name must be at least 1 character long.", 'register_error')
-            is_valid = False
-
-        # Email
-        if not EMAIL_REGEX.match(user_data['email'].strip()):
-            flash("Invalid email address!", 'register_error')
-            is_valid = False
-
-        # Password Length
-        if not len(user_data['password'].strip()) >= 8:
-            flash("Password must be at least 8 characters long!", 'register_error')
-            is_valid = False
-
-        # Password Regex
-        if not PASSWORD_REGEX.match(user_data['password']):
-            flash('''
-                    Password must contain at least 1 of each of the following: \n
-                    lowercase letter, uppercase letter, number, and special character''',
-                  'register_error')
-            is_valid = False
-
-        # Password Match
-        if not user_data['password'].strip() == user_data['confirm_password'].strip():
-            flash("Passwords must match!", 'register_error')
-            is_valid = False
-
-        return is_valid
+        try:
+            UserData(**user_data)
+            return True
+        except ValidationError as e:
+            print("Validation Error:", e)
+            for error in e.errors():
+                if error['loc'][0] == 'email':
+                    flash('Invalid email address.', 'register_error')
+                else:
+                    flash(
+                        f"{error['msg'].strip('Value Error, ')}", 'register_error')
+            return False

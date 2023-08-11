@@ -40,6 +40,9 @@ def register() -> Response:
     '''
     data: Dict[str, str] = dict(request.form)
     if not User.validate_user(data):
+        print(f'''\n\n{'_'*80}\n\nUser Not Valid\n\n
+            {'_'*80}'''
+              )
         return redirect(url_for('index'))
 
     user_id: int = User.register_user(data)
