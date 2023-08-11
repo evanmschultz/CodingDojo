@@ -12,7 +12,7 @@ This is a Flask web application created for a [Coding Dojo](https://www.codingdo
 -   **Password Security**: Passwords are securely hashed using bcrypt.
 -   **Input Validation**: Utilizes Pydantic to validate user input during registration.
 -   **Session Management**: Utilizes sessions to store and confirm user IDs.
--   **Responsive Design**: The web pages are designed to be responsive and are styled using the Skeleton CSS framework.
+-   **Simple, Clean Design**: The pages are designed to simple and clean using the Skeleton CSS framework.
 
 ## Database
 
