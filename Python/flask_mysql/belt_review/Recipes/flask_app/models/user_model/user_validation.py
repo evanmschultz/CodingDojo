@@ -6,6 +6,8 @@ from pydantic import (
 )
 import re
 
+from flask_app.models.user_model import user
+
 
 class UserData(BaseModel):
     """
@@ -46,8 +48,8 @@ class UserData(BaseModel):
         Raises:
             ValueError: If the first_name value is empty.
         """
-        if len(value.strip()) < 1:
-            raise ValueError("First Name can't be empty.")
+        if len(value.strip()) < 2:
+            raise ValueError("First Name must be at least 2 characters.")
         return value
 
     @field_validator("last_name")
@@ -66,8 +68,8 @@ class UserData(BaseModel):
         Raises:
             ValueError: If the last_name value is empty.
         """
-        if len(value.strip()) < 1:
-            raise ValueError("Last Name can't be empty.")
+        if len(value.strip()) < 2:
+            raise ValueError("Last Name must be at least 2 characters.")
         return value
 
     @field_validator("password")

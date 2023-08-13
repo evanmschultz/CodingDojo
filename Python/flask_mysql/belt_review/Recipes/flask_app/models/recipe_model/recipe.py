@@ -1,3 +1,4 @@
+from typing import Optional
 from flask import flash
 from pydantic import ValidationError
 from flask_app.config.mySQLConnection import connectToMySQL
@@ -22,6 +23,8 @@ class Recipe:
         self.under_30_min: int = recipe_data["under_30_min"]
         self.created_at: datetime = recipe_data["created_at"]
         self.updated_at: datetime = recipe_data["updated_at"]
+        self.user_id: int = recipe_data["user_id"]
+        self.creator_first_name: str = recipe_data["first_name"]
 
     @classmethod
     def get_all_recipes(cls) -> list["Recipe"]:
@@ -51,6 +54,33 @@ class Recipe:
         return recipes
 
     @classmethod
+    def get_recipe_by_id(cls, recipe_id: int) -> Optional["Recipe"]:
+        """
+        Gets a single recipe from the database by its ID, including the name from the row in the
+        users table where the users.id matches the user_id.
+
+        Args:
+            recipe_id (int): The ID of the recipe to retrieve.
+
+        Returns:
+            Recipe: An instance of the Recipe class, or None if not found.
+        """
+        query: str = """
+                    SELECT recipes.*, users.first_name
+                    FROM recipes
+                    LEFT JOIN users ON users.id = recipes.user_id
+                    WHERE recipes.id = %(id)s;
+        """
+        data: dict = {"id": recipe_id}
+        results: tuple[dict] = connectToMySQL(cls.database).select_from_db(query, data)
+
+        recipe = None
+        if results:
+            recipe: Optional[Recipe] = cls(results[0])
+
+        return recipe
+
+    @classmethod
     def add_recipe(cls, recipe_data: dict) -> int:
         """
         Adds a recipe to the database.
@@ -63,14 +93,15 @@ class Recipe:
                     'instructions': str,
                     'date_made': str (yyyy-mm-dd),
                     'under_30_min': int (0 or 1)
+                    'user_id': int
                 }
 
         Returns:
             int: The ID of the created recipe.
         """
         query: str = """
-                    INSERT INTO recipes (name, description, instructions, date_made, under_30_min)
-                    VALUES (%(name)s, %(description)s, %(instructions)s, %(date_made)s, %(under_30_min)s);
+                    INSERT INTO recipes (name, description, instructions, date_made, under_30_min, user_id)
+                    VALUES (%(name)s, %(description)s, %(instructions)s, %(date_made)s, %(under_30_min)s, %(user_id)s);
         """
 
         recipe_id: int = connectToMySQL(cls.database).insert_into_db(query, recipe_data)
@@ -150,5 +181,5 @@ class Recipe:
         except ValidationError as e:
             print("Validation Error:", e)
             for error in e.errors():
-                flash(f"{error['msg']}", "recipe_error")
+                flash(f"{error['msg'].strip('Value error, ')}", "recipe_error")
             return False

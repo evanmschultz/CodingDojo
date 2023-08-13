@@ -11,7 +11,7 @@
 -   [x] Build User Validation
 -   [x] Build Recipe Model
 -   [x] Build Recipe Validation
--   [ ] Build Authentication
+-   [x] Build Authentication
 -   [ ] Test
 -   [ ] Take screen recording and save in project folder
 -   [ ] Make README.md

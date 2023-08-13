@@ -15,21 +15,22 @@ def register():
     """
     Register user route.
 
-    Gets the input data from the form and validates it, if not valid, flashes error
-    messages from the validate_user method in the User model, then redirects to the
-    login_page route. Otherwise, registers the user in the database and stores the user's
-    ID in session, then redirects to the recipes.
+    Gets the input data from the form and validates it using the validate_user method
+    in the User model. If validation fails, flashes error messages and redirects to the
+    login_page route. Otherwise, registers the user in the database, stores the user's
+    ID and first name in session, and redirects to the recipes.
+
+    Returns:
+        Redirect: Redirects to the recipes page if registration is successful, or the
+            login_page route if validation fails.
     """
     data: dict = dict(request.form)
     if not User.validate_user(data):
-        print(
-            f"""\n\n{'_'*80}\n\nUser Not Valid\n\n
-            {'_'*80}"""
-        )
         return redirect(url_for("login_page"))
 
     user_id: int = User.register_user(data)
-    session["user_id"] = user_id
+    user_first_name: str = data["first_name"]
+    session["user_id"], session["user_first_name"] = user_id, user_first_name
     return redirect("/recipes")
 
 
@@ -41,7 +42,12 @@ def login():
     Checks for a user in the database with the input email and password. If the email
     is not in the database or the hashed_password doesn't match that user's password
     in the database, flashes error message and redirects to the login_page route. Otherwise,
-    gets the user_id and stores it in session, then redirect to the recipes.
+    gets the user_id and user_first_name from the database, stores them in session, then redirects
+    to the recipes.
+
+    Returns:
+        Redirect: Redirects to the recipes page if successful, or the login_page route if the
+            email is not in the database or the password doesn't match.
     """
     data: dict = {"email": request.form["email"]}
     user_in_db: User | None = User.get_user_by_email(data)
@@ -53,7 +59,9 @@ def login():
         return redirect(url_for("login_page"))
 
     user_id: int = user_in_db.id
-    session["user_id"] = user_id
+    user_first_name: str = user_in_db.first_name
+    session["user_id"], session["user_first_name"] = user_id, user_first_name
+
     return redirect("/recipes")
 
 

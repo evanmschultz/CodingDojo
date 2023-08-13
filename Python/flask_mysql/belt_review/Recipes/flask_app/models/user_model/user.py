@@ -86,6 +86,35 @@ class User:
         return user
 
     @classmethod
+    def get_user_by_id(cls, user_id: int) -> Optional["User"]:
+        """
+        Gets a user from the database using the user ID.
+
+        Args:
+            user_id (int): The ID of the user.
+
+        Returns:
+            Optional[User]: An instance of the User class if found, None otherwise.
+        """
+        query: str = """
+                    SELECT * FROM users
+                    WHERE id = %(user_id)s;
+        """
+        results: tuple[dict] = connectToMySQL(cls.database).select_from_db(
+            query, {"user_id": user_id}
+        )
+
+        user_data: dict = {}
+        if results:
+            user_data = results[0]
+
+        user = None
+        if len(user_data) > 1:
+            user = cls(user_data)
+
+        return user
+
+    @classmethod
     def register_user(cls, data: dict) -> int:
         """
         Creates a user in the database.
@@ -113,10 +142,25 @@ class User:
     @staticmethod
     def validate_user(user_data: dict) -> bool:
         """
-        Validates user inputs using the Pydantic schema in the user_validation model.
+        Validates user inputs using the Pydantic schema in the user_validation model and
+        checks for email uniqueness.
+
+        1. Extracts the email from the user_data.
+        1. Tries to validate the user_data using the Pydantic schema (UserData) and captures
+        any validation errors.
+        1. If validation errors are found:
+            1. Iterates through the validation errors and appends appropriate error messages
+            to the flash_messages list.
+            1. Sets validation_passed to False.
+        1. Checks if the email already exists in the database:
+            1. If the email exists, appends a flash message to the flash_messages list and sets
+            validation_passed to False.
+        1. Runs loop to get set all flash messages from flash_messages list.
+
+        If there were no validation errors, returns True.
 
         Args:
-            user_data (dict): The user_data from the input form.
+            user_data (dict): The user_data from the input form. Contains:
                 {
                     'first_name': str,
                     'last_name': str,
@@ -126,19 +170,35 @@ class User:
                 }
 
         Returns:
-            boolean: True if validation checks pass, False otherwise.
+            boo: True if validation checks pass and email is unique, False otherwise.
 
         Raises:
-            Flash messages constructed from the ValueErrors in the UserData class.
+            Flash Message: ValueErrors from the UserData class and a message if
+                email already exists.
         """
+        user_email: str = user_data["email"]
+        data: dict = {"email": user_email}
+        validation_passed = True
+        flash_messages = []
+
         try:
             UserData(**user_data)
-            return True
         except ValidationError as e:
-            print("Validation Error:", e)
+            validation_passed = False
+
             for error in e.errors():
                 if error["loc"][0] == "email":
-                    flash("Invalid email address.", "register_error")
+                    flash_messages.append("Invalid email address.")
                 else:
-                    flash(f"{error['msg'].strip('Value Error, ')}", "register_error")
-            return False
+                    flash_messages.append(f"{error['msg'].strip('Value Error, ')}")
+
+        if User.get_user_by_email(data):
+            validation_passed = False
+            flash_messages.append(
+                "Email already exists. Login or use a different email."
+            )
+
+        for message in flash_messages:
+            flash(message, "register_error")
+
+        return validation_passed

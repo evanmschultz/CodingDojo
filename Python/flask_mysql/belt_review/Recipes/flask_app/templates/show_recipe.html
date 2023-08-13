@@ -5,7 +5,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 		<meta charset="utf-8" />
 		<title>Recipe Share</title>
-		<meta name="description" content="Login or Register page" />
+		<meta name="description" content="Display Recipe Page" />
 		<meta name="author" content="Evan Schultz" />
 
 		<!-- Mobile Specific Metas
@@ -45,10 +45,10 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 			<div class="flex u-nav-container" style="align-items: center">
-				<h1>Welcome, {{user_data.user_first_name}}</h1>
+				<h1>Welcome, {{user_first_name}}</h1>
 				<div class="flex">
 					<button style="margin-right: 2rem">
-						<a href="/recipes/add">+Create</a>
+						<a href="/recipes">Recipes</a>
 					</button>
 					<button>
 						<a href="/logout">Logout</a>
@@ -59,63 +59,42 @@
 			<!-- Header
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-			<div>
-				<p>All posted recipes:</p>
+			<div class="flex">
+				<h2>{{recipe.name}}</h2>
+				<h4>
+					Posted By: {% if recipe.creator_first_name !=
+					user_first_name%} {{recipe.creator_first_name}} {% else %}
+					You {% endif %}
+				</h4>
 			</div>
 
-			<!--------------------------  
-                Flash Messages
-                    –––––––––––––––––––– -->
-
-			<div>
-				{% with messages =
-				get_flashed_messages(category_filter=['recipe_error',
-				'recipe_success']) %} {% if messages %}
-				<ul class="flashes">
-					{% for message in messages %}
-					<li>{{ message }}</li>
-					{% endfor %}
-				</ul>
-				{% endif %} {% endwith %}
-			</div>
-
-			<!-- Recipes Table
+			<!-- Recipe Display
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			<div class="u-border">
+				<div class="recipe-content">
+					<p>Description</p>
+					<p>{{recipe.description}}</p>
+				</div>
 
-			<table>
-				<thead>
-					<th>Name</th>
-					<th>Under 30 Min</th>
-					<th>Posted By</th>
-					<th>Actions</th>
-				</thead>
-				{% for recipe in recipes %}
-				<tr>
-					<td>{{recipe.name}}</td>
-					<td>{{recipe.under_30_min}}</td>
-					<td>{{recipe.creator_first_name}}</td>
-					<td>
-						<a
-							href="{{ url_for('show_recipe', recipe_id=recipe.id) }}"
-							>View Recipe</a
-						>
-						{% if recipe.user_id == user_data.user_id%} |
-						<a href="/recipes/{{recipe.id}}/edit">Edit Recipe</a>
-						|
-						<form
-							action="/recipes/{{recipe.id}}/delete"
-							method="post"
-							style="display: inline"
-						>
-							<button type="submit" class="delete-button">
-								Delete Recipe
-							</button>
-						</form>
-						{% endif %}
-					</td>
-				</tr>
-				{% endfor %}
-			</table>
+				<div class="recipe-content">
+					<p>Under 30 Minutes</p>
+					{% if recipe.under_30_min == 1 %}
+					<p>Yes</p>
+					{% else %}
+					<p>No</p>
+					{% endif %}
+				</div>
+
+				<div class="recipe-content">
+					<p>Instructions</p>
+					<p>{{recipe.instructions}}</p>
+				</div>
+
+				<div class="recipe-content">
+					<p>Date Made</p>
+					<p>{{recipe.date_made}}</p>
+				</div>
+			</div>
 		</main>
 
 		<!-- End Document

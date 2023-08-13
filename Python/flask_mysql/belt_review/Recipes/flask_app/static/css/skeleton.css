@@ -449,34 +449,44 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Tables */
 table {
 	width: 100%;
+	border-collapse: collapse;
 }
-tr {
-	width: 100%;
-	display: grid;
-	border-bottom: 1px solid #e1e1e1;
-	padding-bottom: 0.7rem;
-}
-.book-row {
-	grid-template-columns: 3fr 1fr;
-}
-thead .book-row {
-	display: flex;
-	justify-content: space-between;
+thead {
 	border-bottom: 1px solid #a0a0a0 !important;
 }
-.book-row td:last-child {
-	text-align: right;
+thead tr th {
+	padding: 12px 15px;
 }
-tr:last-child {
-	border: none;
-	margin-bottom: 0;
+tr {
+	border-bottom: 1px solid #e1e1e1;
 }
 th,
 td {
 	padding: 12px 15px 0;
+	text-align: center;
+}
+th:nth-child(1),
+td:nth-child(1) {
+	width: 30%;
 	text-align: left;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+	width: 14.44%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+	width: 22.22%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+	width: 33.33%;
 }
 th:first-child,
 td:first-child {
@@ -535,6 +545,25 @@ form {
 .u-margin-top {
 	margin-top: 3.1rem;
 }
+.login-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2.5rem;
+}
+.u-nav-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+.u-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+.u-container > :first-child {
+	flex: 6 1 320px;
+}
+.u-container > :nth-child(2) {
+	flex: 1 1;
+}
 .grid {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
@@ -568,6 +597,32 @@ form {
 }
 .flashes {
 	color: #a70000;
+}
+.recipe-content {
+	display: flex;
+	width: 100%;
+}
+.recipe-content p:first-child {
+	flex: 1;
+}
+.recipe-content p:last-child {
+	flex: 2;
+}
+.delete-button {
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	color: #555;
+	cursor: pointer;
+	text-decoration: underline;
+	display: inline;
+	margin: 0;
+	outline: none;
+	text-transform: none;
+}
+.delete-button:hover {
+	color: #10a3d0;
 }
 
 /* Misc

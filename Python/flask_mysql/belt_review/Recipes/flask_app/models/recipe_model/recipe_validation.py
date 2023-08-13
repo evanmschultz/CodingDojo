@@ -101,7 +101,7 @@ class RecipeData(BaseModel):
         try:
             datetime.strptime(value.strip(), "%Y-%m-%d")
         except ValueError:
-            raise ValueError("Date must be in the format yyyy-mm-dd.")
+            raise ValueError("Date made must be included.")
         return value
 
     @field_validator("under_30_min")
