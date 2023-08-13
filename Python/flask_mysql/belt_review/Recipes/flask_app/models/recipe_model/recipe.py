@@ -19,7 +19,7 @@ class Recipe:
         self.name: str = recipe_data["name"]
         self.description: str = recipe_data["description"]
         self.instructions: str = recipe_data["instructions"]
-        self.date_made: str = recipe_data["date_made"]
+        self.date_made: datetime = recipe_data["date_made"]
         self.under_30_min: int = recipe_data["under_30_min"]
         self.created_at: datetime = recipe_data["created_at"]
         self.updated_at: datetime = recipe_data["updated_at"]
@@ -176,6 +176,10 @@ class Recipe:
             Flash messages constructed from the ValueErrors in the RecipeData class.
         """
         try:
+            print(
+                f"""\n\n{'_'*80}\n\nRecipe date_made\n\n
+                {recipe_data['date_made']}\n{'_'*80}"""
+            )
             RecipeData(**recipe_data)
             return True
         except ValidationError as e:

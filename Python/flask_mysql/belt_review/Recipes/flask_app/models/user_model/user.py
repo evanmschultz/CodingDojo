@@ -146,15 +146,12 @@ class User:
         checks for email uniqueness.
 
         1. Extracts the email from the user_data.
-        1. Tries to validate the user_data using the Pydantic schema (UserData) and captures
+        1. Validates the user_data using the Pydantic schema (UserData) and captures
         any validation errors.
-        1. If validation errors are found:
-            1. Iterates through the validation errors and appends appropriate error messages
-            to the flash_messages list.
-            1. Sets validation_passed to False.
-        1. Checks if the email already exists in the database:
-            1. If the email exists, appends a flash message to the flash_messages list and sets
-            validation_passed to False.
+        1. If validation errors are found, stores messages in flash_messages list and sets validation_passed
+        to False.
+        1. Checks if the email already exists in the database, if it does, appends a flash message to the
+        flash_messages list and sets validation_passed to False.
         1. Runs loop to get set all flash messages from flash_messages list.
 
         If there were no validation errors, returns True.
@@ -170,7 +167,7 @@ class User:
                 }
 
         Returns:
-            boo: True if validation checks pass and email is unique, False otherwise.
+            bool: True if validation checks pass and email is unique, False otherwise.
 
         Raises:
             Flash Message: ValueErrors from the UserData class and a message if
