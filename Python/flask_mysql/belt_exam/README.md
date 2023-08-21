@@ -20,3 +20,5 @@ The TV Shows Social Media App is a Python Flask project developed as part of the
 -   **Pydantic**: Data validation and settings management using Python type annotations.
 -   **MySQL**: Database to store the application data.
 -   **PyMySQL**: MySQL database connector for Python.
+
+## [Deployed Application](http://52.90.230.156/)
