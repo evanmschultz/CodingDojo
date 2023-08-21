@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>TV Shows!</title>
+		<meta name="description" content="Display TV Show Page" />
+		<meta name="author" content="Evan Schultz" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/normalize.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/skeleton.css') }}"
+		/>
+
+		<!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="icon"
+			type="image/png"
+			href="{{ url_for('static', filename='assests/CodingDojoLogo.png') }}"
+		/>
+	</head>
+	<body>
+		<main class="container" style="padding-top: 5vh">
+			<!-- Navbar
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<div class="flex-end">
+				<button style="margin-right: 2rem">
+					<a href="/tv_shows">TV Shows</a>
+				</button>
+				<button>
+					<a href="/logout">Logout</a>
+				</button>
+			</div>
+
+			<!-- TV Show Display
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+			<div class="u-border">
+				<div class="flex">
+					<h1>{{tv_show.title}}</h1>
+					<h4>Likes: {{ tv_show.likes_count }}</h4>
+				</div>
+
+				<div class="tv-show-content">
+					<p><b>Description: </b>{{tv_show.description}}</p>
+				</div>
+
+				<div class="tv-show-content">
+					<p><b>Network: </b>{{tv_show.network}}</p>
+				</div>
+
+				<div class="tv-show-content">
+					<p><b>Release Date: </b>{{tv_show_release_date}}</p>
+				</div>
+				<div class="tv-show-content">
+					<br />
+					<p><b>Posted by: </b>{{tv_show.creator_first_name}}</p>
+				</div>
+			</div>
+		</main>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>

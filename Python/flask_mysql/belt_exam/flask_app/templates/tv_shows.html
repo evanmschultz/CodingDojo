@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta charset="utf-8" />
+		<title>TV Shows!</title>
+		<meta name="description" content="TV Shows page" />
+		<meta name="author" content="Evan Schultz" />
+
+		<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
+
+		<!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/normalize.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/skeleton.css') }}"
+		/>
+
+		<!-- Favicon
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+		<link
+			rel="icon"
+			type="image/png"
+			href="{{ url_for('static', filename='assests/CodingDojoLogo.png') }}"
+		/>
+	</head>
+	<body>
+		<main class="container" style="padding-top: 5vh">
+			<!-- Navbar
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<div class="flex u-nav-container" style="align-items: center">
+				<h1>Welcome, {{user_data.user_first_name}}</h1>
+				<div class="flex">
+					<button style="margin-right: 2rem">
+						<a href="/tv_shows/add">+Create</a>
+					</button>
+					<button>
+						<a href="/logout">Logout</a>
+					</button>
+				</div>
+			</div>
+
+			<!-- Header
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<div>
+				<p>All TV Shows</p>
+			</div>
+
+			<!--------------------------  
+                Flash Messages
+                    –––––––––––––––––––– -->
+
+			<div>
+				{% with messages =
+				get_flashed_messages(category_filter=['tv_show_error',
+				'tv_show_success']) %} {% if messages %}
+				<ul class="flashes">
+					{% for message in messages %}
+					<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %} {% endwith %}
+			</div>
+
+			<!-- TV Shows Table
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+			<table>
+				<thead>
+					<th>Title</th>
+					<th>Network</th>
+					<th>Release Date</th>
+					<th>Actions</th>
+					<th>Like</th>
+				</thead>
+				{% for tv_show in tv_shows %}
+				<tr>
+					<td>{{tv_show.title}}</td>
+					<td>{{tv_show.network}}</td>
+					<td>{{tv_show.release_date}}</td>
+					<td>
+						<a
+							href="{{ url_for('show_tv_show', tv_show_id=tv_show.id) }}"
+							>View</a
+						>
+						{% if tv_show.user_id == user_data.user_id%} |
+						<a href="/tv_shows/{{tv_show.id}}/edit">Edit</a> |
+						<form
+							action="/tv_shows/{{tv_show.id}}/delete"
+							method="post"
+							style="display: inline"
+						>
+							<button type="submit" class="delete-button">
+								Delete
+							</button>
+						</form>
+						{% endif %}
+					</td>
+					<td>
+						{% if user_data.user_id != tv_show.user_id %}
+						<form
+							action="/tv_shows/{{tv_show.id}}{% if user_data.user_id not in tv_show.like_user_ids %}/like{% else %}/unlike{% endif %}"
+							method="post"
+							style="display: inline"
+						>
+							<button type="submit">
+								{% if user_data.user_id not in
+								tv_show.like_user_ids %} 👍 {% else %} 👎 {%
+								endif %}
+							</button>
+						</form>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</main>
+
+		<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	</body>
+</html>
