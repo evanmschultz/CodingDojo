@@ -22,6 +22,7 @@ class TV_Show:
         self.description: str = data["description"]
         self.user_id: int = data["user_id"]
         self.creator_first_name: Optional[str] = None
+        self.creator_last_name: Optional[str] = None
         self.created_at: datetime = data["created_at"]
         self.updated_at: datetime = data["updated_at"]
 
@@ -93,12 +94,11 @@ class TV_Show:
             TV_Show: An instance of the TV_Show class, or None if not found.
         """
         query: str = """
-                    SELECT tv_shows.*, users.first_name AS creator_first_name, likes.user_id AS like_user_id
+                    SELECT tv_shows.*, users.first_name AS creator_first_name, users.last_name AS creator_last_name, likes.user_id AS like_user_id
                     FROM tv_shows
                     LEFT JOIN users ON tv_shows.user_id = users.id
                     LEFT JOIN likes ON tv_shows.id = likes.tv_show_id
                     WHERE tv_shows.id = %(id)s;
-
         """
         data: dict = {"id": tv_show_id}
         results: tuple[dict] = connectToMySQL(cls.database).select_from_db(query, data)
@@ -107,6 +107,8 @@ class TV_Show:
         if results:
             tv_show = cls(results[0])
             tv_show.creator_first_name = results[0]["creator_first_name"]
+            tv_show.creator_last_name = results[0]["creator_last_name"]
+
             for result in results:
                 if result["like_user_id"] is not None:
                     tv_show.like_user_ids.append(result["like_user_id"])
