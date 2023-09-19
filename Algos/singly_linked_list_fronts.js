@@ -32,6 +32,21 @@ class SinglyLinkedList {
 		}
 		return this.head.data;
 	}
+
+	display() {
+		let runner = this.head;
+		let output = '';
+
+		while (runner !== null) {
+			output += runner.data;
+			if (runner.next !== null) {
+				output += ', ';
+			}
+			runner = runner.next;
+		}
+
+		return output;
+	}
 }
 
 // Examples
@@ -39,8 +54,10 @@ const SLL1 = new SinglyLinkedList();
 console.log(SLL1.addFront(18)); // => Node { data: 18, next: null }
 console.log(SLL1.addFront(5)); // => Node { data: 5, next: Node { data: 18, next: null } }
 console.log(SLL1.addFront(73)); // => Node { data: 73, next: Node { data: 5, next: Node { data: 18, next: null } } }
+console.log(SLL1.display()); // => 73, 5, 18
 console.log(SLL1.removeFront()); // => Node { data: 5, next: Node { data: 18, next: null } }
 console.log(SLL1.front()); // => 5
+console.log(SLL1.display()); // => 5, 18
 console.log(SLL1.removeFront()); // => Node { data: 18, next: null }
 console.log(SLL1.front()); // 18
 console.log(SLL1.removeFront()); // => null
